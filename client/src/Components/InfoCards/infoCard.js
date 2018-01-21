@@ -11,7 +11,7 @@ import { ControlLabel } from 'react-bootstrap';
 import Flower from './images/flower.png'
 
 
-const infoCard = () => (
+const infoCard = (props) => (
 	<Form horizontal>
 	<Col md={8} sm={12}>
 		<FormGroup controlId="formHorizontalEmail">
@@ -19,7 +19,7 @@ const infoCard = () => (
 				Your Soil is : 
 			</Col>
 			<Col sm={8}>
-				<h4 id="remind"><i>That guy that i met on the plane today.</i></h4>
+				<h4 id="remind"><i>{props.soil}</i></h4>
 			</Col>
 		</FormGroup>
 		
@@ -28,13 +28,14 @@ const infoCard = () => (
 				Your Seed : 
 			</Col>
 			<Col sm={8}>
-				<h4 id="remind"><i>Danny.</i></h4>
+				<h4 id="remind"><i>{props.seed}</i></h4>
 			</Col>
 		</FormGroup>
 		
 		</Col>
 		<Col md={4} sm={12}>
-		<div className="plant-image">plant image here
+		<div className="plant-image">
+			{/* TODO: image src to depend on props.shownCount */}
 			<img src={ Flower }/>
 		</div>
 		

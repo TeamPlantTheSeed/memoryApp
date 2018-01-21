@@ -14,6 +14,8 @@ export default props => (
     <Notifications />
     <BrowserRouter>
     <div>
+      {/* TODO: Move NavBar here from Home screen,
+          using NavLink components for individual links */}
       <div className="navbar">
 
         <NavLink to="/new"

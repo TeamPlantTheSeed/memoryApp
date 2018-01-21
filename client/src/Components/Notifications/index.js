@@ -1,5 +1,6 @@
 import { subscribeToNotifications } from './socket';
 import React, { Component } from 'react';
+import InfoCards from "./../InfoCards/infoCard";
 
 class Notifications extends Component {
   constructor(props) {
@@ -41,11 +42,7 @@ class Notifications extends Component {
     const card = this.state.card;
     return (
 
-      <div className="App">
-        <p className="App-intro white">
-          [{card.shownCount}/3] This is the card: {card.soil}? {card.seed}!
-        </p>
-      </div>
+      <InfoCards seed = {this.state.card.seed} soil = {this.state.card.soil} />
 
     );
   }

@@ -11,10 +11,10 @@ import Form from 'react-bootstrap/lib/Form';
 const formInstance = (
     <form>
         <FormGroup bsSize="large">
-            <FormControl className="soil" type="text" placeholder="ex: Where you met, what purpose, which language, etc..." />
+            <FormControl className="seed" type="text" placeholder="Seed: Name, number, etc. Make it short and understandable, you will be tested." />
         </FormGroup>
         <FormGroup bsSize="large" >
-            <FormControl className="seed" type="text" placeholder="ex: Name, number, etc. Make it short and understandable, you will be tested on this." />
+            <FormControl className="soil" type="text" placeholder="Soil: Where you met, what purpose, which language, etc..." />
         </FormGroup>
     </form>
 );
@@ -31,20 +31,31 @@ class PlantButton extends React.Component {
 
     handleHide() {
         this.setState({ show: false });
+        
     }
+
+    componentWillReceiveProps(props){
+        if (props.show === true){
+            this.setState({show: false});
+        } else {
+            //TODO
+            //Undefined
+        }
+    }
+
     render() {
         return (
             <div className="modal-container" style={{ height: 100 }}>
                 <Button
                     bsStyle="warning"
                     bsSize="large"
-                    onClick={() => this.setState({ show: true })}
+                    onClick={() => this.setState({ show: false })}
                 >
                     PLANT A SEED!
                 </Button>
 
                 <Modal
-                    show={this.state.show}
+                    show={this.props.show}
                     onHide={this.handleHide}
                     container={this}
                     aria-labelledby="contained-modal-title"

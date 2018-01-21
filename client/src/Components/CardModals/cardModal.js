@@ -50,7 +50,7 @@ class CardModal extends React.Component {
                 >
                     <Modal.Header closeButton>
                         <Modal.Title id="contained-modal-title">
-                            <h2>Remember this?</h2>
+                            Remember this?
                         </Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
@@ -59,7 +59,7 @@ class CardModal extends React.Component {
                         </div>
                     </Modal.Body>
                     <Modal.Footer>
-                        <Button bsStyle="warning" type="close" onClick={this.handleHide}>Thanks for the Reminder!</Button>
+                        <Button bsStyle="warning" type="submit" onClick={this.handleHide}>Thanks for the Reminder!</Button>
                     </Modal.Footer>
                 </Modal>
             </div>

@@ -8,35 +8,36 @@ import FormGroup from 'react-bootstrap/lib/FormGroup';
 import Form from 'react-bootstrap/lib/Form';
 import { Col } from 'react-bootstrap';
 import { ControlLabel } from 'react-bootstrap';
-import Flower from './images/flower.png'
+import Flower from './images/flowerbloom@3x.png'
 
 
 const infoCard = (
 	<Form horizontal>
 	<Col md={8} sm={12}>
-		<FormGroup controlId="formHorizontalEmail">
-			<Col componentClass={ControlLabel} sm={4}>
-				Your Soil is : 
-			</Col>
-			<Col sm={8}>
-				<h4 id="remind"><i>That guy that i met on the plane today.</i></h4>
-			</Col>
-		</FormGroup>
 		
 		<FormGroup controlId="formHorizontalEmail">			
 		<Col componentClass={ControlLabel} sm={4}>
 				Your Seed : 
 			</Col>
 			<Col sm={8}>
-				<h4 id="remind"><i>Danny.</i></h4>
+				<h4 id="remind-seed"><i>Danny.</i></h4>
+			</Col>
+		</FormGroup>
+
+		<FormGroup controlId="formHorizontalEmail">
+			<Col componentClass={ControlLabel} sm={4}>
+				Your Soil : 
+			</Col>
+			<Col sm={8}>
+				<h4 id="remind-soil"><i>That guy that i met on the plane today.</i></h4>
 			</Col>
 		</FormGroup>
 		
 		</Col>
 		<Col md={4} sm={12}>
-		<div className="plant-image">plant image here
-			{ Flower }
-			<img src="./images/flower.png"/>
+		<div >
+			<img src={Flower} width={100} height={100} alt="flower"/>
+			
 		</div>
 		
 		</Col>

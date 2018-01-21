@@ -9,17 +9,24 @@
   }
   .modal { 
       text-align: left; 
-    h1 {
+    }
+    
+    
+    
+      h1,#userModTitle {
       color: orange;
     }
-    h3 { 
+    h4,#userModBody{ 
            color: rgb(85, 60, 17)
     }
-  }
 
   form {
       .soil,.seed{
           color: rgb(67, 49, 18);
         }
         
+    }
+
+    .hide {
+      display: none;
     }

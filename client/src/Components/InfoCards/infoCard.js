@@ -11,7 +11,7 @@ import { ControlLabel } from 'react-bootstrap';
 import Flower from './images/flowerbloom@3x.png'
 
 
-const infoCard = (
+const InfoCard = () => (
 	<Form horizontal>
 	<Col md={8} sm={12}>
 		
@@ -50,4 +50,4 @@ const infoCard = (
 	</Form>
 );
 
-export default (infoCard);
+export default InfoCard;

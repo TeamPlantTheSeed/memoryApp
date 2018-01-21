@@ -6,9 +6,10 @@ import Button from 'react-bootstrap/lib/Button';
 import FormControl from 'react-bootstrap/lib/FormControl';
 import FormGroup from 'react-bootstrap/lib/FormGroup';
 import Form from 'react-bootstrap/lib/Form';
-import infoCard from '../InfoCards';
+import InfoCard from '../InfoCards';
+import { setTimeout } from "timers";
 
-const userInfoCard = infoCard;
+// const userInfoCard = infoCard;
 /**
  * You will want to include this bit of css
  *
@@ -29,21 +30,30 @@ class CardModal extends React.Component {
         this.state = { show: false };
     }
 
+
     handleHide() {
+        this.props.close_modal(false);
         this.setState({ show: false });
     }
+
+    openModal = () => {
+        this.setState({ show: true })
+    };
+
+
     render() {
+        console.log("Card Modal: ", this.state);
         return (
             <div className="modal-container" style={{ height: 200 }}>
-                <Button
+                {/* <Button
                     bsStyle="warning"
-                    bsSize="large"
-                    onClick={() => this.setState({ show: true })}
+                    bsSize="large" 
+                    onClick={ this.openModal }
                 >Button for Data/Image
-				</Button>
+				</Button> */}
 
                 <Modal
-                    show={this.state.show}
+                    show={this.props.show }
                     onHide={this.handleHide}
                     container={this}
                     aria-labelledby="contained-modal-title"
@@ -54,9 +64,7 @@ class CardModal extends React.Component {
                         </Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-                        <div>
-                            {userInfoCard}
-                        </div>
+                        <InfoCard />
                     </Modal.Body>
                     <Modal.Footer>
                         <Button bsStyle="warning" type="submit" onClick={this.handleHide}>Thanks for the Reminder!</Button>

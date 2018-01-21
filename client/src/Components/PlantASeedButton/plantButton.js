@@ -26,40 +26,42 @@ class PlantButton extends React.Component {
 
         this.handleHide = this.handleHide.bind(this);
 
-        this.state = { show: false };
+        this.state = { show: false, count: 0 };
     }
 
     handleHide() {
         this.setState({ show: true });
-        
+
     }
-    closeModal(){
+    closeModal = () => {
         this.setState({ show: false });
     }
 
-    componentWillReceiveProps(props){
-        if (props.show === true){
-            this.handleHide();
-        } else {
-            //TODO
-            //Undefined
+    componentWillReceiveProps(props) {
+        const { count } = this.state;
+        const { show } = props;
+        if (show === true && count === 0) {
+            this.setState({ show: true, count: 1 });
+        } else if (count === 1 && show === true) {
+            this.setState({ count: 0 });
         }
     }
 
     render() {
         return (
             <div className="modal-container" style={{ height: 100 }}>
-                <Button
+                {/* <Button
                     bsStyle="warning"
                     bsSize="large"
+                    className="hide"
                     onClick={() => this.setState({ show: true })}
                 >
                     PLANT A SEED!
-                </Button>
+                </Button> */}
 
                 <Modal
-                    show={this.props.show}
-                    onHide={this.handleHide}
+                    show={this.state.show}
+                    onHide={this.closeModal}
                     container={this}
                     aria-labelledby="contained-modal-title"
                 >
@@ -71,16 +73,16 @@ class PlantButton extends React.Component {
                     <Modal.Body>
                         <h3>Enter your "Seed", the thing you want
                             to remember. Then enter your "Soil", a bit of reference info
-                            to help you remember your seed. Plant it,                       
+                            to help you remember your seed. Plant it,
                         then watch it grow.</h3>
-                    {formInstance}
+                        {formInstance}
                     </Modal.Body>
                     <Modal.Footer >
                         <Button
-                        class="plant-btn"
-                        bsStyle="warning"
-                        bsSize="large"
-                        onClick={this.handleHide}>Plant it!</Button>
+                            class="plant-btn"
+                            bsStyle="warning"
+                            bsSize="large"
+                            onClick={this.closeModal}>Plant it!</Button>
                     </Modal.Footer>
                 </Modal>
             </div>

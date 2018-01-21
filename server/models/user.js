@@ -7,7 +7,7 @@ module.exports = function(sequelize, DataTypes) {
         len: [1, 50]
       }
     },
-    password: {
+    userPassword: {
       type: DataTypes.STRING(150),
       allowNull: false,
       validate: {
@@ -16,7 +16,8 @@ module.exports = function(sequelize, DataTypes) {
     },
     active: {
       type: DataTypes.BOOLEAN,
-      defaultValue: false
+      defaultValue: false,
+      allowNull: false
     }
   });
 

@@ -3,19 +3,19 @@ const db = require("../models");
 // Defining methods for the booksController
 const controller = {
   findAll: (req, res) => {
-    db.Organization.findAll({
+    db.User.findAll({
         where: {
-          inactive: false
+          active: true
         }
       })
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
   findById: function(req, res) {
-    db.Organization.findOne({
+    db.User.findOne({
         where: {
           id: req.params.id,
-          inactive: false
+          active: true
         }
       })
       .then(dbModel => {
@@ -30,29 +30,29 @@ const controller = {
       .catch(err => res.status(422).json(err));
   },
   create: function(req, res) {
-    db.Organization.create({
-        name: req.body.name,
-        description: req.body.description
+    db.User.create({
+      userName: req.body.userName,
+      userPassword: req.body.userPassword
       })
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
   update: function(req, res) {
-    db.Organization.update({
-        name: req.body.name,
-        description: req.body.description
+    db.User.update({
+      userName: req.body.userName,
+      userPassword: req.body.userPassword
       }, {
         where: {
           id: req.params.id,
-          inactive: false
+          active: true
         }
       })
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
   remove: function(req, res) {
-    db.Organization.update({
-        inactive: true
+    db.User.update({
+        active: false
       }, {
         where: {
           id: req.params.id

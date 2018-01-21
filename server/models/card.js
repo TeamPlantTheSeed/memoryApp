@@ -14,13 +14,10 @@ module.exports = function(sequelize, DataTypes) {
         len: [1, 150]
       }
     },
-    // userId: {
-    //   type: DataTypes.INTEGER,
-    //   allowNull: false
-    // },
     active: {
       type: DataTypes.BOOLEAN,
-      defaultValue: true
+      defaultValue: true,
+      allowNull: false
     },
     shownCount: {
       type: DataTypes.INTEGER,
@@ -28,7 +25,8 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: false
     },
     lastShown: {
-      type: DataTypes.DATE
+      type: DataTypes.DATE,
+      allowNull: true
     }
   });
   Card.associate = function(models) {

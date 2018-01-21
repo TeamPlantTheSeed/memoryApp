@@ -11,7 +11,7 @@ import { ControlLabel } from 'react-bootstrap';
 import Flower from './images/flower.png'
 
 
-const infoCard = (
+const infoCard = () => (
 	<Form horizontal>
 	<Col md={8} sm={12}>
 		<FormGroup controlId="formHorizontalEmail">
@@ -35,8 +35,7 @@ const infoCard = (
 		</Col>
 		<Col md={4} sm={12}>
 		<div className="plant-image">plant image here
-			{ Flower }
-			<img src="./images/flower.png"/>
+			<img src={ Flower }/>
 		</div>
 		
 		</Col>

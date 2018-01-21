@@ -21,23 +21,3 @@ export default path => {
   return app;
   // -------------------------------------------------
 };
-
-import db from "./models";
-
-db.User.create({
-  userName: 'name',
-  password: 'pass',
-  active: true,
-})
-  .then(User => {
-
-    db.Card.create({
-      seed: 'seed',
-      soil: 'soil',
-      active: true,
-      shownCount: 0,
-      lastShown: new Date(),
-      UserId: User.id,
-    })
-
-  })

@@ -25,7 +25,7 @@ const MyNavbar = (props) => (
 
 		{!props.isLoggedIn ? (
             <Nav pullRight >
-                
+                {/* TODO: map() over props.children */}
                 <NavItem eventKey={1} href="#">             
                         <UserLogon />               
                 </NavItem>

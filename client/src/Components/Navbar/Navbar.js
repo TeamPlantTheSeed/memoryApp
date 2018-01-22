@@ -17,8 +17,7 @@ const MyNavbar = (props) => (
 		<Navbar.Header  >
 			<Navbar.Brand  >
 				<NavItem>
-					<img alt="leaflogo" src={LeafLogo} width="75" height="50">
-					</img>
+					<img alt="leaflogo" src={LeafLogo} width="75" height="50" />
 				</NavItem>
 			</Navbar.Brand>
 		</Navbar.Header>

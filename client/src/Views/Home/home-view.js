@@ -26,7 +26,7 @@ const LightBulbResponsive = <Image src={LightBulb} responsive />;
 const FlowerResponsive = <Image src={Flower} responsive />;
 
 //for button state change
-const isLoggedIn = true;
+const isLoggedIn = false;
 
 
 export default props =>
@@ -139,6 +139,27 @@ to long term memory using proven methods.</h2>
       </Grid>
       <Footer />
     </div>
+<div>
+  {/* //practice space for seed view page */}
+  <Navbar isLoggedIn={isLoggedIn} />
+  <div className='home section1'>
+    {/* <Grid > */}
+    <Row className="logo-row">
+      <Col xs={1} md={3}>
+      </Col>
+      <Col className="logo" xs={10} md={6}>
+        <CardModal />
+      </Col>
+      <Col xs={1} md={3}>
+      </Col>
+    </Row>
+    <Row>
+      
+    </Row>
+    {/* </Grid> */}
   </div>
-
+  
+</div>
+{/* //end practice space */}
+  </div>
 

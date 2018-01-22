@@ -1,8 +1,8 @@
 import React from 'react';
 import './home-view.scss';
 import ActionButton from '../../Components/Button'
-import Footer from '../../Components/Footer'
-import Navbar from '../../Components/Navbar'
+// import Footer from '../../Components/Footer'
+// import Navbar from '../../Components/Navbar'
 import Modal from 'react-bootstrap/lib/Modal'
 import ButtonToolbar from 'react-bootstrap/lib/ButtonToolbar';
 import Button from 'react-bootstrap/lib/Button';
@@ -26,12 +26,12 @@ const LightBulbResponsive = <Image src={LightBulb} responsive />;
 const FlowerResponsive = <Image src={Flower} responsive />;
 
 //for button state change
-const isLoggedIn = true;
+// const isLoggedIn = true;
 
 
 export default props =>
   <div>
-    <Navbar isLoggedIn={isLoggedIn} />
+    {/* <Navbar isLoggedIn={isLoggedIn} /> */}
     <div className='home section1'>
       {/* <Grid > */}
       <Row className="logo-row">
@@ -137,7 +137,7 @@ to long term memory using proven methods.</h2>
           </Col>
         </Row>
       </Grid>
-      <Footer />
+      {/* <Footer /> */}
     </div>
   </div>
 

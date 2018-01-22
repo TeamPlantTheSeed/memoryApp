@@ -12,8 +12,8 @@ function unsubscribeFromNotifications(userID, cb) {
   socket.emit('unsubscribeFromNotifications', userID);
 }
 
-function reactOnCard(cardID, answer) {
-  socket.emit('answer', cardID, answer);
+function reactOnCard(card, answer) {
+  socket.emit('answer', card, answer);
 }
 
 export {

@@ -41,7 +41,8 @@ export default httpServer => {
 
         // TODO: Only expect card ID, and restore Card object from DB by that ID
         client.on('answer', (aCard, givenAnswer) => {
-            if (givenAnswer == aCard.seed) {
+            card.markedAsShown(aCard.id);            
+            if (aCard.shownCount >= 2 && givenAnswer == aCard.seed) {
                 // TODO: implement controller method
                 card.deactivate(aCard.id);
             }
@@ -56,11 +57,10 @@ export default httpServer => {
                 console.log(`Sending card ${aCard} to client ${client}`)
                 client.emit('cardNotification', aCard);                    
                 card.markAsNotified(aCard.id);
-                // TODO: implement controller method
 
-                setTimeout(() => {
-                    card.markedAsShown(aCard.id);
-                }, 30000);
+                // setTimeout(() => {
+                //     card.markedAsShown(aCard.id);
+                // }, 30000);
             }
             // }, this);
         }

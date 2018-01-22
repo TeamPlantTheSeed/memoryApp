@@ -11,7 +11,7 @@ import { ControlLabel } from 'react-bootstrap';
 import Flower from './images/flowerbloom@3x.png'
 
 
-const InfoCard = () => (
+const InfoCard = (props) => (
 	<Form horizontal>
 	<Col md={8} sm={12}>
 		
@@ -20,7 +20,7 @@ const InfoCard = () => (
 				Your Seed : 
 			</Col>
 			<Col sm={8}>
-				<h4 id="remind-seed"><i>Danny.</i></h4>
+				<h4 id="remind-seed"><i>{props.seed}</i></h4>
 			</Col>
 		</FormGroup>
 
@@ -29,14 +29,15 @@ const InfoCard = () => (
 				Your Soil : 
 			</Col>
 			<Col sm={8}>
-				<h4 id="remind-soil"><i>That guy that i met on the plane today.</i></h4>
+				<h4 id="remind-soil"><i>{props.soil}</i></h4>
 			</Col>
 		</FormGroup>
 		
 		</Col>
 		<Col md={4} sm={12}>
 		<div >
-			<img src={Flower} width={100} height={100} alt="flower"/>
+			<img src={Flower} width={100} height={100} alt="flower"
+				onClick={props.clicked}/>
 			
 		</div>
 		

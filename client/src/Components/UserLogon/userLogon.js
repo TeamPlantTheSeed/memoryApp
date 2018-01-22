@@ -31,12 +31,10 @@ class UserLogon extends React.Component {
 
         this.state = { show: false };
 
-        // TODO: this have to be invoked when the user logs in
-        context.subscribeForNotifications(1);        
     }
 
     handleHide() {
-        this.setState({ show: false, show_button: true });
+        this.setState({ show: false, show_button: false });
     }
 
 
@@ -79,7 +77,14 @@ class UserLogon extends React.Component {
                         <Button
                             bsStyle="warning"
                             bsSize="large"
-                            onClick={this.handleHide}
+                            onClick={(e) => {
+                                this.handleHide();
+                                // TODO: this have to be invoked when 
+                                // the user actually logs in
+                                this.props.login();
+                                this.context.subscribeForNotifications(1);
+                                this.context.updateCards(1);
+                            }}
                         >Let's GO!</Button>
 
                     </Modal.Footer>
@@ -94,6 +99,7 @@ class UserLogon extends React.Component {
 
 UserLogon.contextTypes = {
     subscribeForNotifications: PropTypes.func,
+    updateCards: PropTypes.func,
 };
 
 export default UserLogon;

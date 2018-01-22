@@ -7,8 +7,9 @@ import {
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
-import CardModal from "../CardModals/cardModal";
+import axios from 'axios'
 import Button from 'react-bootstrap/lib/Button';
+import CardModal from "../CardModals/cardModal";
 
 class Notifications extends Component {
 
@@ -35,23 +36,31 @@ class Notifications extends Component {
       // API interface
       updateCards: this.updateCards,
       subscribeForCardsUpdate: this.subscribeForCardsUpdate,
+      unsubscribeFromCardsUpdate: this.unsubscribeFromCardsUpdate,
     };
   }
 
   subscribeForCardsUpdate = (subscriber) => {
+    subscriber(this.state.allCards);
     this.subscribed = [ ...this.subscribed, subscriber ]
   }
 
-  updateCards = (userID) => {
-    // TODO: API call /api/users/<id>/cards
-    const cards = []
-    for (const subscriber of this.subscribed) {
-      subscriber(cards)
-    }
+  unsubscribeFromCardsUpdate = (subscriber) => {
+    this.subscribed = this.subscribed.filter((x) => x != subscriber)
   }
 
-  reactOnCard = (cardID, answer) => {
-    socketReact(cardID, answer)
+  updateCards = (userID) => {
+    axios.get(`/api/cards/user/${userID}`).then((resp) => {
+      this.setState({allCards: resp.data});
+      for (const subscriber of this.subscribed) {
+        subscriber(resp.data);
+      }  
+    })
+  }
+
+  reactOnCard = (card, answer) => {
+    socketReact(card, answer);
+    this.updateCards(this.state.userID);
   }
 
   notificationsWatcher = (err, card) => {
@@ -59,6 +68,7 @@ class Notifications extends Component {
       card: card,
       show: true,
     })
+    this.updateCards(this.state.userID);
     // Let's check whether notification permissions have already been granted
     if (Notification.permission === "granted") {
       this.showNotification(card);
@@ -88,11 +98,15 @@ class Notifications extends Component {
       'icon': 'https://www.iconexperience.com/_img/o_collection_png/green_dark_grey/512x512/plain/leaf.png',
       'requireInteraction': true,
     }
-    const notification = new Notification(card.soil, options);
-    notification.onclick = (x) => {
-        window.focus();
-        this.props.history.push('/review');
-        notification.close();
+    if (this.props.history.location.pathname != '/review') {
+      const notification = new Notification(card.soil, options);
+      notification.onclick = (x) => {
+          window.focus();
+          if (this.props.history.location.pathname != '/review') {
+            this.props.history.push('/review');
+          }
+          notification.close();
+      }
     }
   }
 
@@ -100,7 +114,9 @@ class Notifications extends Component {
 
   handleHide = (bool) => {
     this.setState({ show: bool });
-    this.props.history.push('/review');
+    if (this.props.history.location.pathname != '/review') {
+      this.props.history.push('/review');
+    }
   }
 
   // openModal = () => {
@@ -112,8 +128,8 @@ class Notifications extends Component {
     const card = this.state.card;
     return (
       <div>
-        <CardModal show={this.state.show} close_modal={this.handleHide}
-          seed={card.seed} soil={card.soil}/>
+        {/* <CardModal show={this.state.show} close_modal={this.handleHide}
+          seed={card.seed} soil={card.soil}/> */}
         { this.props.children }
       </div>
     );
@@ -126,6 +142,7 @@ Notifications.childContextTypes = {
   reactOnCard: PropTypes.func,
   updateCards: PropTypes.func,
   subscribeForCardsUpdate: PropTypes.func,
+  unsubscribeFromCardsUpdate: PropTypes.func,
 };
 
 

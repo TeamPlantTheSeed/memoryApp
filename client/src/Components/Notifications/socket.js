@@ -1,9 +1,23 @@
 import openSocket from 'socket.io-client';
 
-const  socket = openSocket('https://planttheseed.herokuapp.com');
+const socket = openSocket(window.location.origin);
 
-function subscribeToTimer(cb) {
-  socket.on('timer', timestamp => cb(null, timestamp));
-  socket.emit('subscribeToTimer', 1000);
+function subscribeForNotifications(userID, cb) {
+  socket.on('cardNotification', card => cb(null, card));
+  socket.emit('subscribeForNotifications', userID);
 }
-export { subscribeToTimer };
+
+function unsubscribeFromNotifications(userID, cb) {
+  socket.off('cardNotification', cb);
+  socket.emit('unsubscribeFromNotifications', userID);
+}
+
+function reactOnCard(card, answer) {
+  socket.emit('answer', card, answer);
+}
+
+export {
+  subscribeForNotifications,
+  unsubscribeFromNotifications,
+  reactOnCard,
+}

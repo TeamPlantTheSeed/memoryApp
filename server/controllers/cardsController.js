@@ -41,11 +41,10 @@ const controller = {
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
-  findByUser: (req, res) => {
+  findAllForUser: (req, res) => {
     db.Card.findAll({
       where: {
-        userID: userID,
-        active: true
+        userID: req.params.userID,
       }
       })
       .then(dbModel => res.json(dbModel))
@@ -82,7 +81,53 @@ const controller = {
       })
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
-  }
+  },
+  deactivate: function(cardID) {
+    db.Card.update({
+        active: false
+      }, {
+        where: {
+          id: cardID
+        }
+      })
+  },
+  nextCardsForUser: function(userID, iteration, since, cb) {
+    db.Card.findAll({
+      where: {
+        userID: userID,
+        active: true,
+        notified: false,
+        shownCount: iteration,
+        lastShown: { $lte: since },
+      }
+    })
+      .then(dbModel => cb(dbModel))
+      .catch(err => { });
+  },
+  markAsNotified: function(cardID) {
+    db.Card.update({
+      notified: true,
+    }, {
+      where: {
+        id: cardID,
+      }
+    })
+    .then(dbModel => { })
+    .catch(err => { });    
+  },
+  markedAsShown: function(cardID) {
+    db.Card.update({
+      notified: false,
+      lastShown: new Date(),
+      shownCount: db.Sequelize.literal('shownCount + 1'),
+    }, {
+      where: {
+        id: cardID,
+      }
+    })
+    .then(dbModel => { })
+    .catch(err => { });    
+  },
 };
 
 export { controller as default };

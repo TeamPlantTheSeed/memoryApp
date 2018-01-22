@@ -16,5 +16,25 @@ db.sequelize.sync().then(function() {
   server.listen(PORT, function() {
     console.log('App listening on PORT: ' + PORT);
   });
+
+  db.User.create({
+    id: 1,
+    userName: 'name',
+    userPassword: 'pass',
+    active: true,
+  })
+    .then(User => {
+  
+      db.Card.create({
+        seed: 'Danny.',
+        soil: 'That guy that i met on the plane today.',
+        active: true,
+        shownCount: 0,
+        lastShown: new Date(),
+        UserId: 1,
+      })
+  
+    })
+    .catch(err => {});
 });
 

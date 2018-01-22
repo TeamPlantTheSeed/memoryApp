@@ -39,6 +39,8 @@ class UserLogon extends React.Component {
     render() {
         return (
             <div className="modal-container" style={{ height: 100 }}>
+                {/* TODO: onClick() should push "/login"
+                    to Router history instead */}
                 <Button
                     className="get-started"
                     bsStyle="warning"
@@ -48,6 +50,9 @@ class UserLogon extends React.Component {
                     Let's Get Started!
                 </Button>
 
+            {/* TODO: Extract this modal as separate LoginForm component,
+            set state.show to always be true, exclude from UserLogon 
+            (visibility to be controlled by Router) */}
                 <Modal
                     show={this.state.show}
                     onHide={this.handleHide}

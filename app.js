@@ -35,6 +35,16 @@ db.sequelize.sync().then(function() {
         UserId: 1,
       })
   
+      db.Card.create({
+        seed: 'Answer',
+        soil: 'Question',
+        active: true,
+        shownCount: 0,
+        lastShown: new Date(),
+        notified: false,
+        UserId: 1,
+      })
+  
     })
     .catch(err => {});
 });

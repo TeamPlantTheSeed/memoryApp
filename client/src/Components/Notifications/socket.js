@@ -1,11 +1,23 @@
 import openSocket from 'socket.io-client';
 
-const  socket = openSocket(window.location.origin);
+const socket = openSocket(window.location.origin);
 
-let userID = 1;
-
-function subscribeToNotifications(cb) {
+function subscribeForNotifications(userID, cb) {
   socket.on('cardNotification', card => cb(null, card));
-  socket.emit('subscribeToNotifications', userID);
+  socket.emit('subscribeForNotifications', userID);
 }
-export { subscribeToNotifications };
+
+function unsubscribeFromNotifications(userID, cb) {
+  socket.off('cardNotification', cb);
+  socket.emit('unsubscribeFromNotifications', userID);
+}
+
+function reactOnCard(cardID, answer) {
+  socket.emit('answer', cardID, answer);
+}
+
+export {
+  subscribeForNotifications,
+  unsubscribeFromNotifications,
+  reactOnCard,
+}

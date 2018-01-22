@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from 'prop-types';
 import './userLogon.scss';
 import Modal from 'react-bootstrap/lib/Modal'
 import ButtonToolbar from 'react-bootstrap/lib/ButtonToolbar';
@@ -23,12 +24,15 @@ const userLogon = (
 
 
 class UserLogon extends React.Component {
-    constructor(...args) {
-        super(...args);
+    constructor(props, context, ...args) {
+        super(props, context, ...args);
 
         this.handleHide = this.handleHide.bind(this);
 
         this.state = { show: false };
+
+        // TODO: this have to be invoked when the user logs in
+        context.subscribeForNotifications(1);        
     }
 
     handleHide() {
@@ -88,5 +92,8 @@ class UserLogon extends React.Component {
     }
 }
 
+UserLogon.contextTypes = {
+    subscribeForNotifications: PropTypes.func,
+};
 
 export default UserLogon;

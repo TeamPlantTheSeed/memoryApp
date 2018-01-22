@@ -31,6 +31,7 @@ db.sequelize.sync().then(function() {
         active: true,
         shownCount: 0,
         lastShown: new Date(),
+        notified: false,
         UserId: 1,
       })
   

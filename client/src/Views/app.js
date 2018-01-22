@@ -10,13 +10,11 @@ import Notifications from '../Components/Notifications'
 
 import './app.scss'
 
-
 export default props => (
-  <div>
-    <Notifications />
-    <BrowserRouter>
-    <div>
-      {/* TODO: Move NavBar here from Home screen,
+  <BrowserRouter>
+    <Notifications>
+      <div>
+        {/* TODO: Move NavBar here from Home screen,
           using NavLink components for individual links */}
         <Route exact path="/" component={Home} />
         {/* TODO: Replace with LoginForm */}
@@ -26,8 +24,8 @@ export default props => (
         {/* <PrivateRoute path="/scheduled" component={ScheduledCards} /> */}
         {/* <PrivateRoute path="/archive" component={ArchivedCards} /> */}
       </div>
-    </BrowserRouter>
-  </div>
+    </Notifications>
+  </BrowserRouter>
 )
 
 const fakeAuth = {

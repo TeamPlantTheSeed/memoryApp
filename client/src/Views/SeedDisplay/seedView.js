@@ -3,7 +3,7 @@ import '../Home/home-view.scss';
 // import ActionButton from '../../Components/Button'
 import Footer from '../../Components/Footer'
 import Navbar from '../../Components/Navbar'
-// import Modal from 'react-bootstrap/lib/Modal'
+import Modal from 'react-bootstrap/lib/Modal'
 // import ButtonToolbar from 'react-bootstrap/lib/ButtonToolbar';
 // import Button from 'react-bootstrap/lib/Button';
 // import PlantButton from '../../Components/PlantASeedButton';
@@ -17,7 +17,7 @@ import { Glyphicon } from 'react-bootstrap';
 // import RedDress from './images/NewRedDressCrop.png'
 // import LightBulb from './images/LightBulbCrop.png'
 // import Flower from './images/flower.png'
-// import CardModal from '../../Components/CardModals'
+import CardModal from '../../Components/CardModals'
 import InfoCard from '../../Components/InfoCards'
 
 const isLoggedIn = true;
@@ -50,9 +50,7 @@ class SeedView extends Component {
           <Row>
             <InfoCard seed={card.seed} soil={card.soil}/>
           </Row>
-          <Row>
-            <InfoCard seed={card.seed} soil={card.soil}/>
-          </Row>
+          
           {/* </Grid> */}
         </div>
         <Footer />

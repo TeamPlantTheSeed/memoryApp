@@ -18,12 +18,14 @@ import RedDress from './images/NewRedDressCrop.png'
 import LightBulb from './images/LightBulbCrop.png'
 import Flower from './images/flower.png'
 import CardModal from '../../Components/CardModals'
+import infoCard from "../../Components/InfoCards/infoCard"
 
 //image for main logo
 const imageResponsiveInstance = <Image src={MainLogo} responsive />;
 const RedDressResponsive = <Image src={RedDress} responsive />;
 const LightBulbResponsive = <Image src={LightBulb} responsive />;
 const FlowerResponsive = <Image src={Flower} responsive />;
+const InfoCard = {infoCard};
 
 //for button state change
 const isLoggedIn = false;
@@ -137,29 +139,10 @@ to long term memory using proven methods.</h2>
           </Col>
         </Row>
       </Grid>
-      <Footer />
+      <div>
+      <infoCard /> 
+       </div>
     </div>
-<div>
-  {/* //practice space for seed view page */}
-  <Navbar isLoggedIn={isLoggedIn} />
-  <div className='home section1'>
-    {/* <Grid > */}
-    <Row className="logo-row">
-      <Col xs={1} md={3}>
-      </Col>
-      <Col className="logo" xs={10} md={6}>
-        <CardModal />
-      </Col>
-      <Col xs={1} md={3}>
-      </Col>
-    </Row>
-    <Row>
-      
-    </Row>
-    {/* </Grid> */}
-  </div>
-  
-</div>
-{/* //end practice space */}
+    <Footer />
   </div>
 

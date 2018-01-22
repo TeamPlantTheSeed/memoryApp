@@ -10,16 +10,16 @@ import './Navbar.css';
 import LeafLogo from './images/leaf2.png'
 import UserLogon from '../UserLogon'
 
-const signUpButton = UserLogon;
+// const signUpButton = UserLogon;
 const MyNavbar = (props) => (
 
 	<Navbar className="header">
 		<Navbar.Header  >
 			<Navbar.Brand  >
-				<div >
-					<img responsive img border="2" alt="leaflogo" src={LeafLogo} width="75" height="50">
+				<NavItem>
+					<img alt="leaflogo" src={LeafLogo} width="75" height="50">
 					</img>
-				</div>
+				</NavItem>
 			</Navbar.Brand>
 		</Navbar.Header>
 
@@ -36,10 +36,16 @@ const MyNavbar = (props) => (
 		) : (
 				<Nav pullRight>
 					<NavItem eventKey={1} href="#">
-						<button className="btn btn-large btn-sign-up ">CREATE NEW SEED</button>
+						<button className="btn btn-large btn-other " >YOUR SEEDS</button>
+					</NavItem>
+					<NavItem eventKey={1} href="#">
+						<button className="btn btn-large btn-other " >NEW SEED</button>
+					</NavItem>
+					<NavItem eventKey={1} href="#">
+						<button className="btn btn-large btn-other " >ARCHIVE</button>
 					</NavItem>
 					<NavItem eventKey={2} href="#">
-						<button className="btn btn-large btn-sign-in">LOG OUT</button>
+						<button className="btn btn-large btn-sign-in" >LOG OUT</button>
 					</NavItem>
 				</Nav>
 			)}

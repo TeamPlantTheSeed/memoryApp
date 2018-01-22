@@ -7,6 +7,8 @@ import MyNavbar from '../Components/Navbar'
 import Notifications from '../Components/Notifications'
 
 import './app.scss'
+
+
 export default props => (
   <div>
     <Notifications />
@@ -15,6 +17,9 @@ export default props => (
 
         <Route exact path="/" component={Home} />
         <Route path="/organization" component={Organization} />
+        
+        
+
       </div>
     </BrowserRouter>
   </div>

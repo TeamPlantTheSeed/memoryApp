@@ -11,10 +11,10 @@ import Form from 'react-bootstrap/lib/Form';
 const formInstance = (
     <form>
         <FormGroup bsSize="large">
-            <FormControl className="soil" type="text" placeholder="ex: Where you met, what purpose, which language, etc..." />
+            <FormControl className="seed" type="text" placeholder="Seed: Name, number, etc. Make it short and understandable." />
         </FormGroup>
         <FormGroup bsSize="large" >
-            <FormControl className="seed" type="text" placeholder="ex: Name, number, etc. Make it short and understandable, you will be tested on this." />
+            <FormControl className="soil" type="text" placeholder="Soil: Where you met, what purpose, which language, etc..." />
         </FormGroup>
     </form>
 );
@@ -26,26 +26,42 @@ class PlantButton extends React.Component {
 
         this.handleHide = this.handleHide.bind(this);
 
-        this.state = { show: false };
+        this.state = { show: false, count: 0 };
     }
 
     handleHide() {
+        this.setState({ show: true });
+
+    }
+    closeModal = () => {
         this.setState({ show: false });
     }
+
+    componentWillReceiveProps(props) {
+        const { count } = this.state;
+        const { show } = props;
+        if (show === true && count === 0) {
+            this.setState({ show: true, count: 1 });
+        } else if (count === 1 && show === true) {
+            this.setState({ count: 0 });
+        }
+    }
+
     render() {
         return (
             <div className="modal-container" style={{ height: 100 }}>
-                <Button
+                {/* <Button
                     bsStyle="warning"
                     bsSize="large"
+                    className="hide"
                     onClick={() => this.setState({ show: true })}
                 >
                     PLANT A SEED!
-                </Button>
+                </Button> */}
 
                 <Modal
                     show={this.state.show}
-                    onHide={this.handleHide}
+                    onHide={this.closeModal}
                     container={this}
                     aria-labelledby="contained-modal-title"
                 >
@@ -55,18 +71,18 @@ class PlantButton extends React.Component {
                         </Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-                        <h3>Simply enter a bit of reference info
-                        (the Soil) and the thing you want to
-                        remember (the Seed)…
-                        Then watch it grow.</h3>
-                    {formInstance}
+                        <h3>Enter your "Seed", the thing you want
+                            to remember. Then enter your "Soil", a bit of reference info
+                            to help you remember your seed. Plant it,
+                        then watch it grow.</h3>
+                        {formInstance}
                     </Modal.Body>
                     <Modal.Footer >
                         <Button
-                        class="plant-btn"
-                        bsStyle="warning"
-                        bsSize="large"
-                        onClick={this.handleHide}>Plant it!</Button>
+                            class="plant-btn"
+                            bsStyle="warning"
+                            bsSize="large"
+                            onClick={this.closeModal}>Plant it!</Button>
                     </Modal.Footer>
                 </Modal>
             </div>

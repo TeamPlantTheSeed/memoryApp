@@ -13,7 +13,7 @@ import PlantASeedButton from '../PlantASeedButton'
 const userLogon = (
     <form>
         <FormGroup bsSize="large">
-            <FormControl className="userName" name="name" type="text" placeholder="User Name" />
+            <FormControl className="userName" name="name" type="email" required placeholder="User Email" />
         </FormGroup>
         <FormGroup bsSize="large">
             <FormControl className="userPass" name="password" type="password" placeholder="Password" />
@@ -32,8 +32,10 @@ class UserLogon extends React.Component {
     }
 
     handleHide() {
-        this.setState({ show: false });
+        this.setState({ show: false, show_button: true });
     }
+
+
     render() {
         return (
             <div className="modal-container" style={{ height: 100 }}>
@@ -54,27 +56,28 @@ class UserLogon extends React.Component {
                 >
                     <Modal.Header closeButton>
                         <Modal.Title id="contained-modal-title">
-                            <h1>Are you ready to start planting!</h1>
+                            Are you ready to start planting!
                         </Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-                        <h3>Simply create an account by entering a user name and password. That's it!
+                        <h3 id="userModBody">Simply create an account by entering your email and password. That's it!
                             ...or Sign in using your existing account info.
                             Have fun!</h3>
                         {userLogon}
                     </Modal.Body>
                     <Modal.Footer >
-                        {/* <Button class="plant-btn" onClick={this.handleHide}>Start Planting!</Button> */}
-                        
-                        <Button 
-                        className="signin-btn" 
-                        bsStyle="warning"
-                        bsSize="large"
-                        onClick={this.handleHide }>Let's GO!</Button>
-                        
+
+                        <Button
+                            bsStyle="warning"
+                            bsSize="large"
+                            onClick={this.handleHide}
+                        >Let's GO!</Button>
+
                     </Modal.Footer>
-                    <PlantASeedButton />
                 </Modal>
+                <div className= {this.state.show_button ? "" : "hide"}>
+                    <PlantASeedButton show={this.state.show_button} />
+                </div>
             </div>
         );
     }

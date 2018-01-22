@@ -27,7 +27,12 @@ module.exports = function(sequelize, DataTypes) {
     lastShown: {
       type: DataTypes.DATE,
       allowNull: true
-    }
+    },
+    notified: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false,
+      allowNull: false
+    },
   });
   Card.associate = function(models) {
     // We're saying that a Card should belong to an User

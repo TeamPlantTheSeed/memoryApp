@@ -13,24 +13,15 @@ import { Panel } from 'react-bootstrap';
 
 
 
-const InfoCard = () => (
+const InfoCard = (props) => (
 	<div>
-		{/* <Panel.Title componentClass="h3">
-					Panel heading with a title
-				</Panel.Title> */}
-
 		<Form horizontal className="white">
 			<Col md={2} sm={0}>
 			</Col>
 			<Col md={8} sm={12}>
 				<Panel className="panel-body">
 					<Panel.Body>
-
 						<Form horizontal className="seedInfo">
-							{/* <Col md={2} sm={0} className="empty">
-								empty
-						</Col> */}
-
 							<Col md={8} sm={12} className="">
 								<FormGroup className="head-FormGroup">
 									<Col md={12}>
@@ -45,7 +36,6 @@ const InfoCard = () => (
 								</Col>
 									<Col md={9}>
 									<h3 id="remind-seed"><i>Teddy Ruxpin</i></h3>
-
 								</Col>
 								</FormGroup>
 								<FormGroup className="FormGroup">
@@ -57,7 +47,6 @@ const InfoCard = () => (
 								</Col>
 								</FormGroup>
 							</Col>
-
 							<Col md={4} sm={12} className="some-image">
 								<FormGroup>
 								<Col md={12}>
@@ -74,48 +63,12 @@ const InfoCard = () => (
 								</Col>
 								</FormGroup>
 							</Col>
-							{/* </Col> 
-
-							<Col md={2} sm={0} className="empty"> */}
-						
-
-							{/* old form below */}
-
-							{/* <FormGroup controlId="formHorizontalEmail">
-			<Col componentClass={ControlLabel} md={2} sm={12}>
-			Your Seed :
-			</Col>
-			<Col md={3} sm={12}>
-			<h3 id="remind-seed"><i>Danny.</i></h3>
-			</Col>
-			</FormGroup>
+							..........			
+				{/* <h4 id="remind-soil"><i>{props.soil}</i></h4>
 			
-			<FormGroup controlId="formHorizontalEmail">
-			<Col componentClass={ControlLabel} md={2} sm={12}>
-			Your Soil :
-			</Col>
-			<Col sm={8}>
-			<h3 id="remind-soil"><i>That guy that i met on the plane today.</i></h3>
-			</Col>
-		</FormGroup> */}
-
-							{/* </Col>
-	</Form >
-	
-	<Col md={4} sm={12}>
-	<div >
-	<img src={Flower} width={100} height={100} alt="flower" />
-	
-	</div>
-	
-	</Col>
-	
-	<FormGroup>
-	<Col sm={12}>
-	
-	</Col>
-</FormGroup> */}
-
+			<img src={Flower} width={100} height={100} alt="flower"
+				onClick={props.clicked}/> */}
+............
 						</Form>
 					</Panel.Body>
 				</Panel>

@@ -6,33 +6,49 @@ import Button from 'react-bootstrap/lib/Button';
 import FormControl from 'react-bootstrap/lib/FormControl';
 import FormGroup from 'react-bootstrap/lib/FormGroup';
 import Form from 'react-bootstrap/lib/Form';
-
-
-const formInstance = (
-    <form>
-        <FormGroup bsSize="large">
-            <FormControl className="soil" type="text" placeholder="ex: Where you met, what purpose, which language, etc..." />
-        </FormGroup>
-        <FormGroup bsSize="large" >
-            <FormControl className="seed" type="text" placeholder="ex: Name, number, etc. Make it short and understandable, you will be tested on this." />
-        </FormGroup>
-    </form>
-);
-
+import axios from "axios";
 
 class PlantButton extends React.Component {
     constructor(...args) {
         super(...args);
-
+        
         this.handleHide = this.handleHide.bind(this);
 
-        this.state = { show: false };
+        this.state = { 
+            show: false,
+            seed: '',
+            soil: ''
+        };
     }
 
     handleHide() {
         this.setState({ show: false });
     }
+
+    handleInputChange = event => {    
+        this.setState({
+            [event.target.name]: event.target.value
+        })
+        
+    };
+
+    handleFormSubmit = event => {
+        // Preventing the default behavior of the form submit (which is to refresh the page)
+        // event.preventDefault();
+        if (!this.state.seed) {
+          alert("Enter the seed please!");
+        }
+        alert(`Your seed and soil ${this.state.seed} ${this.state.soil}`);
+        axios.post("api/card/1",{
+            seed: this.state.seed,
+            soil: this.state.soil
+        }).then((response, error) => 
+        console.log(response, error)
+        )
+    };
+    
     render() {
+    
         return (
             <div className="modal-container" style={{ height: 100 }}>
                 <Button
@@ -59,14 +75,35 @@ class PlantButton extends React.Component {
                         (the Soil) and the thing you want to
                         remember (the Seed)…
                         Then watch it grow.</h3>
-                    {formInstance}
+                    {/* {formInstance} */}
+    <form>
+        <FormGroup bsSize="large" >
+            <FormControl
+              name = "seed"
+              type="text"
+              value={this.state.seed}
+              placeholder="ex: Name, number, etc. Make it short and understandable, you will be tested on this."
+              onChange={this.handleInputChange}
+            />
+        </FormGroup>
+        <FormGroup bsSize="large">
+            <FormControl
+              name = "soil"
+              type="text"
+              value={this.state.soil}
+              placeholder="ex: Where you met, what purpose, which language, etc..."
+              onChange={this.handleInputChange}
+            />
+        </FormGroup>
+    </form>
+
                     </Modal.Body>
                     <Modal.Footer >
                         <Button
                         class="plant-btn"
                         bsStyle="warning"
                         bsSize="large"
-                        onClick={this.handleHide}>Plant it!</Button>
+                        onClick={this.handleFormSubmit}>Plant it!</Button>
                     </Modal.Footer>
                 </Modal>
             </div>

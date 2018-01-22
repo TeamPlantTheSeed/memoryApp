@@ -7,34 +7,70 @@ import FormControl from 'react-bootstrap/lib/FormControl';
 import FormGroup from 'react-bootstrap/lib/FormGroup';
 import Form from 'react-bootstrap/lib/Form';
 import PlantASeedButton from '../PlantASeedButton'
+import axios from "axios";
 
 
 
 const userLogon = (
+
     <form>
         <FormGroup bsSize="large">
-            <FormControl className="userName" name="name" type="text" placeholder="User Name" />
+            <FormControl className="userName" name="userName" type="text" placeholder="User Name" />
+            {/* <FormControl
+              type="text"
+              value={this.state.username}
+              placeholder="Enter user name"
+              onChange={this.handleInputChange}
+            /> */}
         </FormGroup>
         <FormGroup bsSize="large">
-            <FormControl className="userPass" name="password" type="password" placeholder="Password" />
+            <FormControl className="userPass" name="userPass" type="password" placeholder="Password" />
         </FormGroup>
     </form>
 );
 
-
 class UserLogon extends React.Component {
     constructor(...args) {
+        console.log("inside constructor");
         super(...args);
 
         this.handleHide = this.handleHide.bind(this);
 
-        this.state = { show: false };
+        this.state = { 
+            show: false,
+            username: '',
+            userpass: '' };
+        
     }
 
     handleHide() {
         this.setState({ show: false });
     }
+
+    handleInputChange = event => {    
+        this.setState({
+            [event.target.name]: event.target.value
+        })
+        
+    };
+
+    handleFormSubmit = event => {
+        // Preventing the default behavior of the form submit (which is to refresh the page)
+        // event.preventDefault();
+        if (!this.state.username) {
+          alert("Enter your username please!");
+        }
+        alert(`Your username and password ${this.state.username} ${this.state.userpass}`);
+        axios.post("https://localhost:3001/",{
+            username: this.state.username,
+            userpass: this.state.userpass
+        }).then((response, error) => 
+        console.log(response, error)
+        )
+    };
+
     render() {
+    
         return (
             <div className="modal-container" style={{ height: 100 }}>
                 <Button
@@ -70,7 +106,8 @@ class UserLogon extends React.Component {
                         className="signin-btn" 
                         bsStyle="warning"
                         bsSize="large"
-                        onClick={this.handleHide }>Let's GO!</Button>
+                        onClick={this.handleFormSubmit }>Let's GO!</Button>
+                        {/* onClick={this.handleHide }>Let's GO!</Button> */}
                         
                     </Modal.Footer>
                     <PlantASeedButton />

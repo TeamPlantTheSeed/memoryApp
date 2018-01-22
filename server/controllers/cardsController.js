@@ -53,6 +53,7 @@ const controller = {
   },
   create: function(req, res) {
     db.Card.create({
+        UserId: req.params.id,
         seed: req.body.seed,
         soil: req.body.soil
       })

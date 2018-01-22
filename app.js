@@ -26,8 +26,8 @@ db.sequelize.sync().then(function() {
     .then(User => {
   
       db.Card.create({
-        seed: 'seed',
-        soil: 'soil',
+        seed: 'Danny.',
+        soil: 'That guy that i met on the plane today.',
         active: true,
         shownCount: 0,
         lastShown: new Date(),

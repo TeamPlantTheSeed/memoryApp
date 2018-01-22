@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Route, NavLink, Redirect } from 'react-router-dom';
 import Home from './Home';
-import ReviewCards from './ReviewCards';
+import SeedDisplay from './SeedDisplay';
 import Organization from './Organization'
 // import MainButtons from '../Components/Button'
 import MyNavbar from '../Components/Navbar'
@@ -18,24 +18,11 @@ export default props => (
     <div>
       {/* TODO: Move NavBar here from Home screen,
           using NavLink components for individual links */}
-      <div className="navbar">
-
-        <NavLink to="/new"
-          activeClassName="active-link">New Card</NavLink> | 
-        <NavLink to="/review"
-          activeClassName="active-link">For Review</NavLink> | 
-        <NavLink to="/scheduled" className="disabled-link"
-          activeClassName="active-link">Scehduled Reminders</NavLink>
-        <NavLink to="/archive" className="disabled-link"
-          activeClassName="active-link">Archive</NavLink> 
-
-      </div>
-
         <Route exact path="/" component={Home} />
         {/* TODO: Replace with LoginForm */}
         <Route exact path="/login" component={UserLogon} />
         {/* <PrivateRoute path="/new" component={NewCard} /> */}
-        <Route path="/review" component={ReviewCards} />
+        <Route path="/review" component={SeedDisplay} />
         {/* <PrivateRoute path="/scheduled" component={ScheduledCards} /> */}
         {/* <PrivateRoute path="/archive" component={ArchivedCards} /> */}
       </div>

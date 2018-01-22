@@ -14,6 +14,7 @@ class ReviewCards extends Component {
     return (
       <div className="App">
         <p className="App-intro white">
+          {/* TODO: remove when done with debugging */}
           [{card.shownCount}/3] This is the card: {card.soil}? {card.seed}!
             </p>
         <InfoCard/>

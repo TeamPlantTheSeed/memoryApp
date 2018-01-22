@@ -29,12 +29,14 @@ class Notifications extends Component {
   showNotification = card => {
     const options = {
       'body': card.seed,
-      'icon': 'https://www.iconexperience.com/_img/o_collection_png/green_dark_grey/512x512/plain/leaf.png'
+      'icon': 'https://www.iconexperience.com/_img/o_collection_png/green_dark_grey/512x512/plain/leaf.png',
+      'requireInteraction': true,
     }
     const nn = new Notification(card.soil, options);
     nn.onclick = function(x) {
-        window.focus()
-        nn.close()
+        window.focus();
+        window.location.pathname = '/review';
+        nn.close();
     }
   }
 

@@ -1,4 +1,4 @@
-import SeedView from './SeedDisplay';
+import SeedView from './seedView';
 export {
   SeedView as default
 };

@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import '../Home/home-view.scss';
+import './seedView.scss';
 // import ActionButton from '../../Components/Button'
-import Footer from '../../Components/Footer'
-import Navbar from '../../Components/Navbar'
 // import Modal from 'react-bootstrap/lib/Modal'
 // import ButtonToolbar from 'react-bootstrap/lib/ButtonToolbar';
 // import Button from 'react-bootstrap/lib/Button';
@@ -20,22 +20,29 @@ import { Glyphicon } from 'react-bootstrap';
 // import CardModal from '../../Components/CardModals'
 import InfoCard from '../../Components/InfoCards'
 
-const isLoggedIn = true;
-
 class SeedView extends Component {
 
+  onCardsUpdated = (cards) => {
+    this.setState({cards});
+  }
+
+  componentWillMount() {
+    this.context.subscribeForCardsUpdate(this.onCardsUpdated);
+  }
+
+  componentWillUnmount() {
+    this.context.unsubscribeFromCardsUpdate(this.onCardsUpdated);
+  }
+
   state = {
-    card: {
-      seed: 'Danny.',
-      soil: 'That guy that i met on the plane today.'
-    }
+    cards: [],
   }
 
   render(){
-    const card = this.state.card;
+    const cards = this.state.cards.filter((card) => card.notified);
+    const filler = "You don't have any seeds to take care of yet. Check back later!" ;
     return (
       <div>
-        <Navbar isLoggedIn={isLoggedIn} />
         <div className='home section1'>
           {/* <Grid > */}
           <Row className="logo-row">
@@ -47,17 +54,30 @@ class SeedView extends Component {
             <Col xs={1} md={3}>
             </Col>
           </Row>
-          <Row>
-            <InfoCard seed={card.seed} soil={card.soil}/>
-          </Row>
-          <Row>
-            <InfoCard seed={card.seed} soil={card.soil}/>
-          </Row>
+
+          {(cards.length == 0) ? (
+            <span className="fillerText">{filler}</span>
+          ) : (
+            cards.map((card) =>
+            <Row key={card.id}>
+              <InfoCard seed={card.seed} soil={card.soil}
+                clicked={(e) => {
+                  this.context.reactOnCard(card);
+                }}/>
+            </Row>      
+            )
+          )}
           {/* </Grid> */}
         </div>
-        <Footer />
       </div>
     );
   }
 }
+
+SeedView.contextTypes = {
+  subscribeForCardsUpdate: PropTypes.func,
+  unsubscribeFromCardsUpdate: PropTypes.func,
+  reactOnCard: PropTypes.func,
+}
+
 export default SeedView;

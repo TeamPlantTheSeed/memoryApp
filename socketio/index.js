@@ -5,14 +5,21 @@ import card from "../server/controllers/cardsController"
 const pollingInterval = config.interval;
 const reminders = config.reminders;
 
+const schedulers = {};
+
 export default httpServer => {
     const io = require('socket.io')(httpServer);
     io.on('connection', (client) => {
 
-        client.on('subscribeToNotifications', (userID) => {
+        client.on('disconnect', () => {
+            console.log(`User dropped connection as client ${client}`);
+            clearInterval(schedulers[client]);
+        })
+
+        client.on('subscribeForNotifications', (userID) => {
             console.log(`User with ID [${userID}] subscribed as client ${client}`);
 
-            setInterval(() => {
+            const interval = setInterval(() => {
                 let since;
                 since = new Date(new Date().getTime() + pollingInterval * 1000 - reminders.first * 1000);
                 card.nextCardsForUser(userID, 0, since, sendNotification);
@@ -23,13 +30,21 @@ export default httpServer => {
                 since = new Date(new Date().getTime() + pollingInterval * 1000 - reminders.recurrent * 1000);
                 card.nextCardsForUser(userID, { $gte: 2 }, since, sendNotification);
             }, pollingInterval * 1000);
+
+            schedulers[client] = interval;
         });
 
+        client.on('unsubscribeFromNotifications', (userID) => {
+            console.log(`User with ID [${userID}] unsubscribed as client ${client}`);
+            clearInterval(schedulers[client]);
+        })
+
         // TODO: Only expect card ID, and restore Card object from DB by that ID
-        client.on('answer', (card, givenAnswer) => {
-            if (givenAnswer == card.seed) {
+        client.on('answer', (aCard, givenAnswer) => {
+            card.markedAsShown(aCard.id);            
+            if (aCard.shownCount >= 2 && givenAnswer == aCard.seed) {
                 // TODO: implement controller method
-                card.deactivate(card.id);
+                card.deactivate(aCard.id);
             }
         });
 
@@ -38,12 +53,14 @@ export default httpServer => {
                 console.log(`No cards for client ${client}`)
             }
             // cards.forEach(function(card) {
-            for (let card of cards) {
-                console.log(`Sending card ${card} to client ${client}`)
-                // TODO: Only pass the fileds needed for rendering
-                client.emit('cardNotification', card);                    
-                // TODO: implement controller method
-                card.incrementShown(card.id);
+            for (let aCard of cards) {
+                console.log(`Sending card ${aCard} to client ${client}`)
+                client.emit('cardNotification', aCard);                    
+                card.markAsNotified(aCard.id);
+
+                // setTimeout(() => {
+                //     card.markedAsShown(aCard.id);
+                // }, 30000);
             }
             // }, this);
         }

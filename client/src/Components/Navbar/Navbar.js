@@ -28,7 +28,7 @@ const MyNavbar = (props) => (
             <Nav pullRight >
                 {/* TODO: map() over props.children */}
                 <NavItem eventKey={1} href="#">             
-                        <UserLogon />               
+                    <UserLogon login={() => props.changeLoggedIn(true)}/> 
                 </NavItem>
             
             </Nav>

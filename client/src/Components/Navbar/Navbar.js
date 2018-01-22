@@ -36,7 +36,13 @@ const MyNavbar = (props) => (
 		) : (
 				<Nav pullRight>
 					<NavItem eventKey={1} href="#">
-						<button className="btn btn-large btn-sign-up " >CREATE NEW SEED</button>
+						<button className="btn btn-large btn-other " >YOUR SEEDS</button>
+					</NavItem>
+					<NavItem eventKey={1} href="#">
+						<button className="btn btn-large btn-other " >NEW SEED</button>
+					</NavItem>
+					<NavItem eventKey={1} href="#">
+						<button className="btn btn-large btn-other " >ARCHIVE</button>
 					</NavItem>
 					<NavItem eventKey={2} href="#">
 						<button className="btn btn-large btn-sign-in" >LOG OUT</button>

@@ -1,8 +1,8 @@
 import React from 'react';
 import './home-view.scss';
 import ActionButton from '../../Components/Button'
-// import Footer from '../../Components/Footer'
-// import Navbar from '../../Components/Navbar'
+import Footer from '../../Components/Footer'
+import Navbar from '../../Components/Navbar'
 import Modal from 'react-bootstrap/lib/Modal'
 import ButtonToolbar from 'react-bootstrap/lib/ButtonToolbar';
 import Button from 'react-bootstrap/lib/Button';

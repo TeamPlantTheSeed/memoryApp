@@ -1,3 +1,4 @@
+import {interval, reminders} from '../config/scheduler.js'
 import routers from "./routes";
 import express from "express";
 import bodyParser from "body-parser";
@@ -15,6 +16,13 @@ export default path => {
 
   app.use("/api/cards", routers.card);
   app.use("/api/users", routers.user);
+
+  app.get("/api/config", (req, res) => {
+    res.json({
+      interval,
+      reminders,
+    })
+  })
 
   // Any non API GET routes will be directed to our React App and handled by React Router
   app.get("*", (req, res) => {

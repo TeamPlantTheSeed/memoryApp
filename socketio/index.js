@@ -1,4 +1,3 @@
-
 const config = require('../config/scheduler.js')
 import card from "../server/controllers/cardsController"
 
@@ -52,17 +51,27 @@ export default httpServer => {
             if (cards.length == 0) {
                 console.log(`No cards for client ${client}`)
             }
-            // cards.forEach(function(card) {
-            for (let aCard of cards) {
-                console.log(`Sending card ${aCard} to client ${client}`)
-                client.emit('cardNotification', aCard);                    
-                card.markAsNotified(aCard.id);
 
-                // setTimeout(() => {
-                //     card.markedAsShown(aCard.id);
-                // }, 30000);
+            for (let aCard of cards) {
+                let remains = aCard.lastShown - new Date().getTime();
+                switch (aCard.shownCount) {
+                    case 0:
+                        remains += reminders.first * 1000;
+                        break;
+                    case 1:
+                        remains += reminders.second * 1000;
+                        break;
+                
+                    default:
+                        remains += reminders.recurrent * 1000;
+                        break;
+                }
+                console.log(`Sending card ${aCard} to client ${client} in ${remains / 1000} sec.`);
+                setTimeout(() => {
+                    client.emit('cardNotification', aCard);
+                    card.markAsNotified(aCard.id);
+                }, remains); 
             }
-            // }, this);
         }
 
     });

@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Route, NavLink, Redirect } from 'react-router-dom';
 import Home from './Home';
-import SeedDisplay from './SeedDisplay';
+import Archive from './Archive';
+import Scheduled from './Scheduled';
+import Seeds from './Seeds';
 import Organization from './Organization'
 import Navbar from '../Components/Navbar'
 import Footer from '../Components/Footer'
@@ -37,9 +39,9 @@ class App extends Component {
             <Route exact path="/" component={Home} />
 
             <PrivateRoute path="/new" component={PlantASeedButton} isLoggedIn={isLoggedIn}/>
-            <PrivateRoute path="/review" component={SeedDisplay} isLoggedIn={isLoggedIn}/>
-            {/* <PrivateRoute path="/scheduled" component={ScheduledCards} /> */}
-            {/* <PrivateRoute path="/archive" component={ArchivedCards} /> */}
+            <PrivateRoute path="/review" component={Seeds} isLoggedIn={isLoggedIn}/>
+            <PrivateRoute path="/scheduled" component={Scheduled} isLoggedIn={isLoggedIn}/>
+            <PrivateRoute path="/archive" component={Archive} isLoggedIn={isLoggedIn}/>
 
             <Route path="/logout" render={(props) => (
               <Logout {...props} logout={() => this.changeLoggedIn(false)}/>

@@ -42,7 +42,8 @@ export default props =>
         <Col xs={1} md={0}>
         </Col>
         <Col className="logo" xs={10} md={12}>
-          <img responsive src={MainLogo} alt="logo" />
+          {/* <img responsive src={MainLogo} alt="logo" /> */}
+          <img src={MainLogo} alt="logo" />
         </Col>
         <Col xs={1} md={0}>
         </Col>

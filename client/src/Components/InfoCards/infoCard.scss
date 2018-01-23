@@ -1,4 +1,4 @@
-#remind-seed,#remind-soil {
+.remind-seed, .remind-soil {
         color: orange;
 }
 
@@ -25,4 +25,19 @@
     color: white;
 }
 
+.blurred-seed {
+    color: transparent;
+    text-shadow: 0 0 5px rgba(59, 47, 26, 0.9);
+}
 
+.invisible-seed {
+    display: none;
+}
+
+.correct-seed {
+    color: lightgreen;
+}
+
+.incorrect-seed {
+    color: lightcoral;
+}

@@ -38,20 +38,23 @@ const MyNavbar = (props) => (
 
 
 		) : (
-				<Nav pullRight>
-					<NavItem eventKey={1} href="#">
-						<NavLink to="/review" 
-							className="btn btn-large btn-other" 
-							activeClassName="btn-other-active">
-							YOUR SEEDS
-						</NavLink>
-					</NavItem>
+			<span>
+				<Nav pullLeft>
 					<NavItem eventKey={1} href="#">
 						<NavLink to="/new" 
 							className="btn btn-large btn-other" 
 							activeClassName="btn-other-active">
 							NEW SEED
 						</NavLink>						
+					</NavItem>
+				</Nav>
+				<Nav pullRight>					
+					<NavItem eventKey={1} href="#">
+						<NavLink to="/review" 
+							className="btn btn-large btn-other" 
+							activeClassName="btn-other-active">
+							YOUR SEEDS
+						</NavLink>
 					</NavItem>
 					<NavItem eventKey={1} href="#">
 						<NavLink to="/scheduled" 
@@ -75,6 +78,7 @@ const MyNavbar = (props) => (
 						</NavLink>						
 					</NavItem>
 				</Nav>
+			</span>
 			)}
 	</Navbar>
 );

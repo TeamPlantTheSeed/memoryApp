@@ -73,9 +73,7 @@ const controller = {
       .catch(err => res.status(422).json(err));
   },
   remove: function(req, res) {
-    db.Card.update({
-        active: false
-      }, {
+    db.Card.destroy({
         where: {
           id: req.params.id
         }

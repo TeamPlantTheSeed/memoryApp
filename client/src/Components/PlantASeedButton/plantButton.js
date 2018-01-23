@@ -41,8 +41,8 @@ class PlantButton extends React.Component {
         // event.preventDefault();
         if (!this.state.seed) {
           alert("Enter the seed please!");
+          return;
         }
-        alert(`Your seed and soil ${this.state.seed} ${this.state.soil}`);
         const userID = 1;
         axios.post(`/api/cards/user/${userID}`, {
             seed: this.state.seed,
@@ -50,6 +50,10 @@ class PlantButton extends React.Component {
         }).then((response, error) => 
         console.log(response, error)
         )
+        this.setState({
+            seed: '',
+            soil: '',
+        })
     };
     
     render() {
@@ -106,7 +110,7 @@ class PlantButton extends React.Component {
                     </Modal.Body>
                     <Modal.Footer >
                         <Button
-                        class="plant-btn"
+                        className="plant-btn"
                         bsStyle="warning"
                         bsSize="large"
                         onClick={this.handleFormSubmit}>Plant it!</Button>

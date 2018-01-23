@@ -1,8 +1,8 @@
 import React from 'react';
 import './home-view.scss';
 import ActionButton from '../../Components/Button'
-// import Footer from '../../Components/Footer'
-// import Navbar from '../../Components/Navbar'
+import Footer from '../../Components/Footer'
+import Navbar from '../../Components/Navbar'
 import Modal from 'react-bootstrap/lib/Modal'
 import ButtonToolbar from 'react-bootstrap/lib/ButtonToolbar';
 import Button from 'react-bootstrap/lib/Button';
@@ -18,14 +18,17 @@ import RedDress from './images/NewRedDressCrop.png'
 import LightBulb from './images/LightBulbCrop.png'
 import Flower from './images/flower.png'
 import CardModal from '../../Components/CardModals'
+import infoCard from "../../Components/InfoCards/infoCard"
 
 //image for main logo
 const imageResponsiveInstance = <Image src={MainLogo} responsive />;
 const RedDressResponsive = <Image src={RedDress} responsive />;
 const LightBulbResponsive = <Image src={LightBulb} responsive />;
 const FlowerResponsive = <Image src={Flower} responsive />;
+const InfoCard = {infoCard};
 
 //for button state change
+const isLoggedIn = false;
 // const isLoggedIn = true;
 
 
@@ -139,6 +142,6 @@ to long term memory using proven methods.</h2>
       </Grid>
       {/* <Footer /> */}
     </div>
+    <Footer />
   </div>
-
 

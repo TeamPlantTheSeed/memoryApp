@@ -45,6 +45,8 @@ class CardModal extends React.Component {
         console.log("Card Modal: ", this.state);
         return (
             <div className="modal-container" style={{ height: 0 }}>
+               
+              
                 {/* <Button
                     bsStyle="warning"
                     bsSize="large" 

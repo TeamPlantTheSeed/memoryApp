@@ -6,11 +6,8 @@
     position: absolute; 
     left: 0 ; right: 0; bottom: 0; 
     width: 100%;
+    text-align: center;
+    color: rgb(95, 230, 58);
+    padding-top: 70px;
 }
 
-.info-text { 
-    text-align: center;
-    /* display: inline-block; */
-    color: rgb(84, 64, 18);
-    padding-top: 60px;
-}

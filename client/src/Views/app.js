@@ -3,10 +3,10 @@ import { BrowserRouter, Route, NavLink, Redirect } from 'react-router-dom';
 import Home from './Home';
 import SeedDisplay from './SeedDisplay';
 import Organization from './Organization'
-// import MainButtons from '../Components/Button'
 import Navbar from '../Components/Navbar'
 import Footer from '../Components/Footer'
 import UserLogon from '../Components/UserLogon'
+import Logout from '../Components/Logout'
 import Notifications from '../Components/Notifications'
 
 import './app.scss'
@@ -22,19 +22,27 @@ class App extends Component {
   }
 
   render() {
+    const isLoggedIn = this.state.isLoggedIn;
     return (
       <BrowserRouter>
         <Notifications>
           <div>
-            <Navbar isLoggedIn={this.state.isLoggedIn}
-              changeLoggedIn={this.changeLoggedIn}/>
+            <Navbar isLoggedIn={isLoggedIn}/>
+
+            <Route exact path="/login" render={(props) => (
+              <UserLogon {...props} login={() => this.changeLoggedIn(true)}/> 
+            )}/>            
+
             <Route exact path="/" component={Home} />
-            {/* TODO: Replace with LoginForm */}
-            <Route exact path="/login" component={UserLogon} />
+
             {/* <PrivateRoute path="/new" component={NewCard} /> */}
-            <Route path="/review" component={SeedDisplay} />
+            <PrivateRoute path="/review" component={SeedDisplay} isLoggedIn={isLoggedIn}/>
             {/* <PrivateRoute path="/scheduled" component={ScheduledCards} /> */}
             {/* <PrivateRoute path="/archive" component={ArchivedCards} /> */}
+
+            <Route path="/logout" render={(props) => (
+              <Logout {...props} logout={() => this.changeLoggedIn(false)}/>
+            )}/>
             <Footer/>
           </div>
         </Notifications>
@@ -46,21 +54,9 @@ class App extends Component {
 export default App;
 
 
-const fakeAuth = {
-  isAuthenticated: false,
-  authenticate(cb) {
-    this.isAuthenticated = true
-    setTimeout(cb, 100) // fake async
-  },
-  signout(cb) {
-    this.isAuthenticated = false
-    setTimeout(cb, 100)
-  }
-}
-
-const PrivateRoute = ({ component: Component, ...rest }) => (
+const PrivateRoute = ({ isLoggedIn: isAuthenticated, component: Component, ...rest }) => (
   <Route {...rest} render={props => (
-    fakeAuth.isAuthenticated ? (
+    isAuthenticated ? (
       <Component {...props}/>
     ) : (
       <Redirect to={{

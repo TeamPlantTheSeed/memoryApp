@@ -1,4 +1,5 @@
 import React from "react";
+import { Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import './userLogon.scss';
 import Modal from 'react-bootstrap/lib/Modal'
@@ -8,6 +9,7 @@ import FormControl from 'react-bootstrap/lib/FormControl';
 import FormGroup from 'react-bootstrap/lib/FormGroup';
 import Form from 'react-bootstrap/lib/Form';
 import PlantASeedButton from '../PlantASeedButton'
+import Home from '../../Views/Home';
 
 
 
@@ -24,40 +26,34 @@ const userLogon = (
 
 
 class UserLogon extends React.Component {
-    constructor(props, context, ...args) {
-        super(props, context, ...args);
 
-        this.handleHide = this.handleHide.bind(this);
+    state = {
+        redirectToReferrer: false,
+        redirectTo: '/',
+        respectOriginalReferrer: true,
+    };
 
-        this.state = { show: false };
-
+    handleHide = (redirectTo, respectOriginalReferrer) => {
+        this.setState({
+            redirectToReferrer: true,
+            redirectTo,
+            respectOriginalReferrer,
+        })
     }
-
-    handleHide() {
-        this.setState({ show: false, show_button: false });
-    }
-
 
     render() {
-        return (
+        const { from } = (this.state.respectOriginalReferrer &&
+                          this.props.location.state ||
+                          {from: this.state.redirectTo});
+        return this.state.redirectToReferrer ? (
+            <Redirect to={from}/>
+        ) : (
+            <div>
+                <Home/>
             <div className="modal-container" style={{ height: 100 }}>
-                {/* TODO: onClick() should push "/login"
-                    to Router history instead */}
-                <Button
-                    className="get-started"
-                    bsStyle="warning"
-                    bsSize="large"
-                    onClick={() => this.setState({ show: true })}
-                >
-                    Let's Get Started!
-                </Button>
-
-            {/* TODO: Extract this modal as separate LoginForm component,
-            set state.show to always be true, exclude from UserLogon 
-            (visibility to be controlled by Router) */}
                 <Modal
-                    show={this.state.show}
-                    onHide={this.handleHide}
+                    show={true}
+                    onHide={() => this.handleHide('/', false)}
                     container={this}
                     aria-labelledby="contained-modal-title"
                 >
@@ -78,7 +74,7 @@ class UserLogon extends React.Component {
                             bsStyle="warning"
                             bsSize="large"
                             onClick={(e) => {
-                                this.handleHide();
+                                this.handleHide('/new', true);
                                 // TODO: this have to be invoked when 
                                 // the user actually logs in
                                 this.props.login();
@@ -89,9 +85,7 @@ class UserLogon extends React.Component {
 
                     </Modal.Footer>
                 </Modal>
-                <div className= {this.state.show_button ? "" : "hide"}>
-                    <PlantASeedButton show={this.state.show_button} />
-                </div>
+            </div>
             </div>
         );
     }

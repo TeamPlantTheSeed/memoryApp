@@ -1,4 +1,5 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 import './home-view.scss';
 import ActionButton from '../../Components/Button'
 import Footer from '../../Components/Footer'
@@ -128,7 +129,15 @@ to long term memory using proven methods.</h2>
               </Col>
               <Col className="step-list" md={10}>
                 <h2>On your final prompt, your ‘seed’ will fully blossom, rooting it to memory using a proven <u>retention</u> technique.</h2>
-                <UserLogon />
+
+                <NavLink to="/login">
+                  <Button className="get-started"
+                      bsStyle="warning"
+                      bsSize="large">
+                    Let's Get Started!
+                  </Button>        
+                </NavLink>  
+
                {/* took out history = {props.history.push} in the above component */}
               </Col>
             </Row>

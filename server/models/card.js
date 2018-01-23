@@ -26,7 +26,8 @@ module.exports = function(sequelize, DataTypes) {
     },
     lastShown: {
       type: DataTypes.DATE,
-      allowNull: true
+      allowNull: true,
+      defaultValue: new Date()
     },
     notified: {
       type: DataTypes.BOOLEAN,

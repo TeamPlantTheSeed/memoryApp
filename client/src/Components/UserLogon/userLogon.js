@@ -9,6 +9,7 @@ import FormControl from 'react-bootstrap/lib/FormControl';
 import FormGroup from 'react-bootstrap/lib/FormGroup';
 import Form from 'react-bootstrap/lib/Form';
 import PlantASeedButton from '../PlantASeedButton'
+import axios from "axios";
 import Home from '../../Views/Home';
 
 
@@ -16,14 +17,19 @@ import Home from '../../Views/Home';
 const userLogon = (
     <form>
         <FormGroup bsSize="large">
-            <FormControl className="userName" name="name" type="email" required placeholder="User Email" />
+            <FormControl className="userName" name="userName" type="text" placeholder="User Name" />
+            {/* <FormControl
+              type="text"
+              value={this.state.username}
+              placeholder="Enter user name"
+              onChange={this.handleInputChange}
+            /> */}
         </FormGroup>
         <FormGroup bsSize="large">
-            <FormControl className="userPass" name="password" type="password" placeholder="Password" />
+            <FormControl className="userPass" name="userPass" type="password" placeholder="Password" />
         </FormGroup>
     </form>
 );
-
 
 class UserLogon extends React.Component {
 
@@ -31,14 +37,44 @@ class UserLogon extends React.Component {
         redirectToReferrer: false,
         redirectTo: '/',
         respectOriginalReferrer: true,
+        username: '',
+        userpass: '' 
     };
-
+        
     handleHide = (redirectTo, respectOriginalReferrer) => {
         this.setState({
             redirectToReferrer: true,
             redirectTo,
             respectOriginalReferrer,
         })
+    }
+
+    handleInputChange = event => {    
+        this.setState({
+            [event.target.name]: event.target.value
+        })
+    }
+
+    handleFormSubmit = event => {
+        // Preventing the default behavior of the form submit (which is to refresh the page)
+        // event.preventDefault();
+        // if (!this.state.username) {
+        //   alert("Enter your username please!");
+        // }
+        // alert(`Your username and password ${this.state.username} ${this.state.userpass}`);
+        axios.post("/api/users/", {
+            username: this.state.username,
+            userpass: this.state.userpass
+        }).then((response) => {
+            console.log(response);
+        }).catch((error) => {
+            console.log(error);            
+        }).then(() => {
+            this.props.login();
+            this.handleHide('/new', true);
+            this.context.subscribeForNotifications(1);
+            this.context.updateCards(1);
+        });
     }
 
     render() {
@@ -73,14 +109,7 @@ class UserLogon extends React.Component {
                         <Button
                             bsStyle="warning"
                             bsSize="large"
-                            onClick={(e) => {
-                                this.handleHide('/new', true);
-                                // TODO: this have to be invoked when 
-                                // the user actually logs in
-                                this.props.login();
-                                this.context.subscribeForNotifications(1);
-                                this.context.updateCards(1);
-                            }}
+                            onClick={this.handleFormSubmit}
                         >Let's GO!</Button>
 
                     </Modal.Footer>

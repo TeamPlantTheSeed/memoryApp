@@ -6,27 +6,19 @@ import Button from 'react-bootstrap/lib/Button';
 import FormControl from 'react-bootstrap/lib/FormControl';
 import FormGroup from 'react-bootstrap/lib/FormGroup';
 import Form from 'react-bootstrap/lib/Form';
-
-
-const formInstance = (
-    <form>
-        <FormGroup bsSize="large">
-            <FormControl className="seed" type="text" placeholder="Seed: Name, number, etc. Make it short and understandable." />
-        </FormGroup>
-        <FormGroup bsSize="large" >
-            <FormControl className="soil" type="text" placeholder="Soil: Where you met, what purpose, which language, etc..." />
-        </FormGroup>
-    </form>
-);
-
+import axios from "axios";
 
 class PlantButton extends React.Component {
     constructor(...args) {
         super(...args);
-
+        
         this.handleHide = this.handleHide.bind(this);
 
-        this.state = { show: false, count: 0 };
+        this.state = { 
+            show: true,
+            seed: '',
+            soil: ''
+        };
     }
 
     handleHide() {
@@ -37,17 +29,31 @@ class PlantButton extends React.Component {
         this.setState({ show: false });
     }
 
-    componentWillReceiveProps(props) {
-        const { count } = this.state;
-        const { show } = props;
-        if (show === true && count === 0) {
-            this.setState({ show: true, count: 1 });
-        } else if (count === 1 && show === true) {
-            this.setState({ count: 0 });
-        }
-    }
+    handleInputChange = event => {    
+        this.setState({
+            [event.target.name]: event.target.value
+        })
+        
+    };
 
+    handleFormSubmit = event => {
+        // Preventing the default behavior of the form submit (which is to refresh the page)
+        // event.preventDefault();
+        if (!this.state.seed) {
+          alert("Enter the seed please!");
+        }
+        alert(`Your seed and soil ${this.state.seed} ${this.state.soil}`);
+        const userID = 1;
+        axios.post(`/api/cards/user/${userID}`, {
+            seed: this.state.seed,
+            soil: this.state.soil
+        }).then((response, error) => 
+        console.log(response, error)
+        )
+    };
+    
     render() {
+    
         return (
             <div className="modal-container" style={{ height: 100 }}>
                 {/* <Button
@@ -71,18 +77,39 @@ class PlantButton extends React.Component {
                         </Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-                        <h3>Enter your "Seed", the thing you want
-                            to remember. Then enter your "Soil", a bit of reference info
-                            to help you remember your seed. Plant it,
-                        then watch it grow.</h3>
-                        {formInstance}
+                        <h3>Simply enter a bit of reference info
+                        (the Soil) and the thing you want to
+                        remember (the Seed)…
+                        Then watch it grow.</h3>
+                    {/* {formInstance} */}
+    <form>
+        <FormGroup bsSize="large" >
+            <FormControl
+              name = "seed"
+              type="text"
+              value={this.state.seed}
+              placeholder="ex: Name, number, etc. Make it short and understandable, you will be tested on this."
+              onChange={this.handleInputChange}
+            />
+        </FormGroup>
+        <FormGroup bsSize="large">
+            <FormControl
+              name = "soil"
+              type="text"
+              value={this.state.soil}
+              placeholder="ex: Where you met, what purpose, which language, etc..."
+              onChange={this.handleInputChange}
+            />
+        </FormGroup>
+    </form>
+
                     </Modal.Body>
                     <Modal.Footer >
                         <Button
-                            class="plant-btn"
-                            bsStyle="warning"
-                            bsSize="large"
-                            onClick={this.closeModal}>Plant it!</Button>
+                        class="plant-btn"
+                        bsStyle="warning"
+                        bsSize="large"
+                        onClick={this.handleFormSubmit}>Plant it!</Button>
                     </Modal.Footer>
                 </Modal>
             </div>

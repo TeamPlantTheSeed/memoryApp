@@ -8,6 +8,7 @@ import Footer from '../Components/Footer'
 import UserLogon from '../Components/UserLogon'
 import Logout from '../Components/Logout'
 import Notifications from '../Components/Notifications'
+import PlantASeedButton from '../Components/PlantASeedButton'
 
 import './app.scss'
 
@@ -35,7 +36,7 @@ class App extends Component {
 
             <Route exact path="/" component={Home} />
 
-            {/* <PrivateRoute path="/new" component={NewCard} /> */}
+            <PrivateRoute path="/new" component={PlantASeedButton} isLoggedIn={isLoggedIn}/>
             <PrivateRoute path="/review" component={SeedDisplay} isLoggedIn={isLoggedIn}/>
             {/* <PrivateRoute path="/scheduled" component={ScheduledCards} /> */}
             {/* <PrivateRoute path="/archive" component={ArchivedCards} /> */}

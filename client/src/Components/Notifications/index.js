@@ -84,7 +84,7 @@ class Notifications extends Component {
 
   subscribeForNotifications = (userID) => {
     this.setState({userID});
-    socketSubscribe(userID, this.notificationsWatcher)
+    socketSubscribe(userID, this.notificationsWatcher);
   }
 
   unsubscribeFromNotifications = () => {

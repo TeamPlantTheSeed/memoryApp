@@ -4,7 +4,8 @@ import Home from './Home';
 import Archive from './Archive';
 import Scheduled from './Scheduled';
 import Seeds from './Seeds';
-import Organization from './Organization'
+import NewSeed from './NewSeed'
+
 import Navbar from '../Components/Navbar'
 import Footer from '../Components/Footer'
 import UserLogon from '../Components/UserLogon'
@@ -38,7 +39,7 @@ class App extends Component {
 
             <Route exact path="/" component={Home} />
 
-            <PrivateRoute path="/new" component={PlantASeedButton} isLoggedIn={isLoggedIn}/>
+            <PrivateRoute path="/new" component={NewSeed} isLoggedIn={isLoggedIn}/>
             <PrivateRoute path="/review" component={Seeds} isLoggedIn={isLoggedIn}/>
             <PrivateRoute path="/scheduled" component={Scheduled} isLoggedIn={isLoggedIn}/>
             <PrivateRoute path="/archive" component={Archive} isLoggedIn={isLoggedIn}/>

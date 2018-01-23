@@ -37,6 +37,7 @@ class Notifications extends Component {
       updateCards: this.updateCards,
       subscribeForCardsUpdate: this.subscribeForCardsUpdate,
       unsubscribeFromCardsUpdate: this.unsubscribeFromCardsUpdate,
+      createCard: this.createCard,
       deleteCard: this.deleteCard,
       updateCard: this.updateCard,
     };
@@ -73,6 +74,16 @@ class Notifications extends Component {
     }).then((resp) => {
       this.updateCards(this.state.userID);
     })
+  }
+
+  createCard = (card) => {
+    axios.post(`/api/cards/user/${this.state.userID}`, {
+      seed: card.seed,
+      soil: card.soil
+    }).then((response, error) => {
+      this.updateCards(this.state.userID)
+    })
+
   }
 
   reactOnCard = (card, answer) => {
@@ -160,6 +171,7 @@ Notifications.childContextTypes = {
   reactOnCard: PropTypes.func,
   deleteCard: PropTypes.func,
   updateCard: PropTypes.func,
+  createCard: PropTypes.func,
   updateCards: PropTypes.func,
   subscribeForCardsUpdate: PropTypes.func,
   unsubscribeFromCardsUpdate: PropTypes.func,

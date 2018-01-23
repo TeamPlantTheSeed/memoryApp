@@ -4,6 +4,7 @@ import axios from 'axios'
 import { Row } from 'react-bootstrap';
 import { Col } from 'react-bootstrap';
 import InfoCard from '../InfoCards'
+import PlantASeedButton from '../PlantASeedButton'
 import './cardList.scss';
 
 class CardList extends Component {
@@ -15,7 +16,8 @@ class CardList extends Component {
       cards: [],
       extras: [],
       config: {},
-      time: null
+      time: null,
+      showEditor: false,
     }
 
     if (props.type == 'scheduled') {
@@ -56,10 +58,14 @@ class CardList extends Component {
     this.context.reactOnCard(card, answer);
   }
 
+  editCard = (card) => {
+    this.setState({showEditor: card});
+  }
+
   actions = {
     active: this.animateAnswer,
     archived: this.context.deleteCard,
-    scheduled: this.context.updateCard,
+    scheduled: this.editCard,
   }
 
   render(){
@@ -67,6 +73,9 @@ class CardList extends Component {
     const extras = this.state.extras;
     return (
       <div>
+        {!this.state.showEditor ? "" : (
+          <PlantASeedButton action={this.context.updateCard} card={this.state.showEditor}/>
+        )}
         <div className='section1'>
           <Row className="logo-row">
             <Col xs={1} md={3}>

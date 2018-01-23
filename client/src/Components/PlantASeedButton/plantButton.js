@@ -9,15 +9,15 @@ import Form from 'react-bootstrap/lib/Form';
 import axios from "axios";
 
 class PlantButton extends React.Component {
-    constructor(...args) {
-        super(...args);
+    constructor(props, ...args) {
+        super(props, ...args);
         
         this.handleHide = this.handleHide.bind(this);
 
         this.state = { 
             show: true,
-            seed: '',
-            soil: ''
+            seed: props.seed || '',
+            soil: props.soil || '',
         };
     }
 
@@ -43,17 +43,17 @@ class PlantButton extends React.Component {
           alert("Enter the seed please!");
           return;
         }
-        const userID = 1;
-        axios.post(`/api/cards/user/${userID}`, {
+        this.props.action({
             seed: this.state.seed,
             soil: this.state.soil
-        }).then((response, error) => 
-        console.log(response, error)
-        )
+        })
         this.setState({
             seed: '',
             soil: '',
         })
+        if (this.props.card) {
+            this.closeModal()
+        }
     };
     
     render() {

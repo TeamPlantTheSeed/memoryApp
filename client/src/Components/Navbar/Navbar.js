@@ -16,69 +16,69 @@ const MyNavbar = (props) => (
 	<Navbar className="header">
 		<Navbar.Header  >
 			<Navbar.Brand  >
-				<NavItem>
+				<NavLink to="/">
 					<img alt="leaflogo" src={LeafLogo} width="75" height="50" />
-				</NavItem>
+				</NavLink>
 			</Navbar.Brand>
 		</Navbar.Header>
 
 		{!props.isLoggedIn ? (
-            <Nav pullRight >
-                {/* TODO: map() over props.children */}
-                <NavItem eventKey={1} href="#">   
-                    <NavLink to="/login">
-                        <Button className="get-started"
-                                bsStyle="warning"
-                                bsSize="large">
-                            Let's Get Started!
-                        </Button>        
-                    </NavLink>  
-                </NavItem>
-            </Nav>
+			<Nav pullRight >
+				{/* TODO: map() over props.children */}
+				<NavItem eventKey={1} href="#">
+					<NavLink to="/login">
+						<Button className="get-started"
+							bsStyle="warning"
+							bsSize="large">
+							Let's Get Started!
+                        </Button>
+					</NavLink>
+				</NavItem>
+			</Nav>
 
 
 		) : (
-			<span>
-				<Nav pullLeft>
-					<NavItem eventKey={1} href="#">
-						<NavLink to="/new" 
-							className="btn btn-large btn-other" 
-							activeClassName="btn-other-active">
-							NEW SEED
-						</NavLink>						
-					</NavItem>
-				</Nav>
-				<Nav pullRight>					
-					<NavItem eventKey={1} href="#">
-						<NavLink to="/review" 
-							className="btn btn-large btn-other" 
-							activeClassName="btn-other-active">
-							YOUR SEEDS
+				<span>
+					<Nav pullLeft>
+						<NavItem eventKey={1} href="#">
+							<NavLink to="/new"
+								className="btn btn-large btn-other"
+								activeClassName="btn-other-active">
+								NEW SEED
 						</NavLink>
-					</NavItem>
-					<NavItem eventKey={1} href="#">
-						<NavLink to="/scheduled" 
-							className="btn btn-large btn-other" 
-							activeClassName="btn-other-active">
-							REMINDERS
-						</NavLink>						
-					</NavItem>
-					<NavItem eventKey={1} href="#">
-						<NavLink to="/archive" 
-							className="btn btn-large btn-other" 
-							activeClassName="btn-other-active">
-							ARCHIVE
-						</NavLink>						
-					</NavItem>
-					<NavItem eventKey={2} href="#">
-						<NavLink to="/logout"
-							className="btn btn-large btn-sign-in"
-							activeClassName="btn btn-large link-active">
-							LOG OUT
-						</NavLink>						
-					</NavItem>
-				</Nav>
-			</span>
+						</NavItem>
+					</Nav>
+					<Nav pullRight>
+						<NavItem eventKey={1} href="#">
+							<NavLink to="/review"
+								className="btn btn-large btn-other"
+								activeClassName="btn-other-active">
+								YOUR SEEDS
+						</NavLink>
+						</NavItem>
+						<NavItem eventKey={1} href="#">
+							<NavLink to="/scheduled"
+								className="btn btn-large btn-other"
+								activeClassName="btn-other-active">
+								REMINDERS
+						</NavLink>
+						</NavItem>
+						<NavItem eventKey={1} href="#">
+							<NavLink to="/archive"
+								className="btn btn-large btn-other"
+								activeClassName="btn-other-active">
+								ARCHIVE
+						</NavLink>
+						</NavItem>
+						<NavItem eventKey={2} href="#">
+							<NavLink to="/logout"
+								className="btn btn-large btn-sign-in"
+								activeClassName="btn btn-large link-active">
+								LOG OUT
+						</NavLink>
+						</NavItem>
+					</Nav>
+				</span>
 			)}
 	</Navbar>
 );

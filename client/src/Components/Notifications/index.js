@@ -32,11 +32,13 @@ class Notifications extends Component {
       subscribeForNotifications: this.subscribeForNotifications,
       unsubscribeFromNotifications: this.unsubscribeFromNotifications,
       reactOnCard: this.reactOnCard,
-
+      
       // API interface
       updateCards: this.updateCards,
       subscribeForCardsUpdate: this.subscribeForCardsUpdate,
       unsubscribeFromCardsUpdate: this.unsubscribeFromCardsUpdate,
+      deleteCard: this.deleteCard,
+      updateCard: this.updateCard,
     };
   }
 
@@ -58,7 +60,23 @@ class Notifications extends Component {
     })
   }
 
+  deleteCard = (card) => {
+    axios.delete(`/api/cards/${card.id}`).then((resp) => {
+      this.updateCards(this.state.userID);
+    })
+  }
+
+  updateCard = (card) => {
+    axios.put(`/api/cards/${card.id}`, {
+      seed: card.seed,
+      soil: card.soil,
+    }).then((resp) => {
+      this.updateCards(this.state.userID);
+    })
+  }
+
   reactOnCard = (card, answer) => {
+    console.log('reactOnCard() requested with answer', answer, 'for card', card);
     socketReact(card, answer);
     this.updateCards(this.state.userID);
   }
@@ -140,6 +158,8 @@ Notifications.childContextTypes = {
   subscribeForNotifications: PropTypes.func,
   unsubscribeFromNotifications: PropTypes.func,
   reactOnCard: PropTypes.func,
+  deleteCard: PropTypes.func,
+  updateCard: PropTypes.func,
   updateCards: PropTypes.func,
   subscribeForCardsUpdate: PropTypes.func,
   unsubscribeFromCardsUpdate: PropTypes.func,

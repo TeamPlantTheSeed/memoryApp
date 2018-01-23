@@ -13,34 +13,33 @@ import axios from "axios";
 import Home from '../../Views/Home';
 
 
-
-const userLogon = (
-    <form>
-        <FormGroup bsSize="large">
-            <FormControl className="userName" name="userName" type="text" placeholder="User Name" />
-            {/* <FormControl
-              type="text"
-              value={this.state.username}
-              placeholder="Enter user name"
-              onChange={this.handleInputChange}
-            /> */}
-        </FormGroup>
-        <FormGroup bsSize="large">
-            <FormControl className="userPass" name="userPass" type="password" placeholder="Password" />
-        </FormGroup>
-    </form>
-);
-
 class UserLogon extends React.Component {
 
-    state = {
-        redirectToReferrer: false,
-        redirectTo: '/',
-        respectOriginalReferrer: true,
-        username: '',
-        userpass: '' 
-    };
-        
+    constructor(props, ...args) {
+        super(props, ...args);
+        this.state = {
+            redirectToReferrer: false,
+            redirectTo: '/',
+            respectOriginalReferrer: true,
+            username: '',
+            userpass: '' 
+        };
+    }
+
+    componentWillMount() {
+        const userID = localStorage.getItem('user_id');
+        if (userID) {
+            this.login(userID);
+        }
+    }
+
+    login = (userID) => {
+        this.props.login();
+        this.handleHide('/new', true);
+        this.context.subscribeForNotifications(userID);
+        this.context.updateCards(userID);
+    }
+
     handleHide = (redirectTo, respectOriginalReferrer) => {
         this.setState({
             redirectToReferrer: true,
@@ -58,9 +57,10 @@ class UserLogon extends React.Component {
     handleFormSubmit = event => {
         // Preventing the default behavior of the form submit (which is to refresh the page)
         // event.preventDefault();
-        // if (!this.state.username) {
-        //   alert("Enter your username please!");
-        // }
+        if (!this.state.username || !this.state.userpass) {
+          alert("Enter your username & password please!");
+          return;
+        }
         // alert(`Your username and password ${this.state.username} ${this.state.userpass}`);
         axios.post("/api/users/", {
             username: this.state.username,
@@ -70,13 +70,23 @@ class UserLogon extends React.Component {
         }).catch((error) => {
             console.log(error);            
         }).then(() => {
-            this.props.login();
-            this.handleHide('/new', true);
-            this.context.subscribeForNotifications(1);
-            this.context.updateCards(1);
+            const USER_ID = 1;
+            this.login(USER_ID);
+            localStorage.setItem('user_id', USER_ID);
         });
     }
 
+    userLogonForm = () => (
+        <form>
+            <FormGroup bsSize="large">
+                <FormControl className="userName" name="username" type="text" placeholder="User Name" onChange={this.handleInputChange}/>
+            </FormGroup>
+            <FormGroup bsSize="large">
+                <FormControl className="userPass" name="userpass" type="password" placeholder="Password" onChange={this.handleInputChange}/>
+            </FormGroup>
+        </form>
+    );
+    
     render() {
         const { from } = (this.state.respectOriginalReferrer &&
                           this.props.location.state ||
@@ -102,7 +112,7 @@ class UserLogon extends React.Component {
                         <h3 id="userModBody">Simply create an account by entering your email and password. That's it!
                             ...or Sign in using your existing account info.
                             Have fun!</h3>
-                        {userLogon}
+                        {this.userLogonForm()}
                     </Modal.Body>
                     <Modal.Footer >
 

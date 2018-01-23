@@ -8,6 +8,7 @@ import { Redirect } from 'react-router-dom';
 class Logout extends React.Component {
 
     componentWillMount() {
+        localStorage.removeItem('user_id');
         this.props.logout();
         this.context.unsubscribeFromNotifications();
     }    

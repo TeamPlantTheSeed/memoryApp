@@ -1,18 +1,17 @@
 import React from "react";
-import './plantButton.scss';
+import { Redirect } from 'react-router-dom';
+import axios from "axios";
 import Modal from 'react-bootstrap/lib/Modal'
 import ButtonToolbar from 'react-bootstrap/lib/ButtonToolbar';
 import Button from 'react-bootstrap/lib/Button';
 import FormControl from 'react-bootstrap/lib/FormControl';
 import FormGroup from 'react-bootstrap/lib/FormGroup';
 import Form from 'react-bootstrap/lib/Form';
-import axios from "axios";
+import './plantButton.scss';
 
 class PlantButton extends React.Component {
     constructor(props, ...args) {
         super(props, ...args);
-        
-        this.handleHide = this.handleHide.bind(this);
 
         this.state = { 
             show: true,
@@ -21,10 +20,6 @@ class PlantButton extends React.Component {
         };
     }
 
-    handleHide() {
-        this.setState({ show: true });
-
-    }
     closeModal = () => {
         this.setState({ show: false });
     }
@@ -57,8 +52,9 @@ class PlantButton extends React.Component {
     };
     
     render() {
-    
-        return (
+        return (!this.props.card && !this.state.show) ? (
+            <Redirect to='/review'/>
+        ) : (
             <div className="modal-container" style={{ height: 100 }}>
                 {/* <Button
                     bsStyle="warning"

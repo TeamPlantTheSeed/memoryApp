@@ -7,15 +7,42 @@
     font-family: helvetica;
     
 }
-.btn-sign-in {
+
+
+.btn-other {
     color: rgb(255, 255, 255);
-    border: 2px solid rgb(255, 255, 255);
+    border: 1px solid rgb(255, 255, 255);
+    border-radius: 25px;
+    background-color: rgba(255, 0, 0, 0);
+}
+.btn-other:hover {
+    background-color: white;
+    color: #f2a83c ;
+}
+
+.btn-other:active {
+    background-color: white;
+    color: #f2a83c ;
+}
+
+.btn-other-active {
+    background-color: white;
+    border: 1px solid rgb(255, 255, 255);
+    border-radius: 25px;
+    color: #f2a83c ;
+    /* text-decoration: underline; */
+}
+
+.btn-sign-in {
+    color: #f2a83c;
+    border: 1px solid #f2a83c;
     border-radius: 25px;
     background-color: rgba(255, 0, 0, 0);
 }
 
-.btn-sign-in :hover {
-    background-color: white;
+.btn-sign-in:hover {
+    background-color: #f2a83c;
+    color: white;
 }
 
 .header {

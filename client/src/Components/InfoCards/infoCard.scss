@@ -1,3 +1,28 @@
-#remind {
-    color: orange;
+#remind-seed,#remind-soil {
+        color: orange;
 }
+
+.white {
+    color: rgb(235, 36, 36);
+    text-align: center;
+}
+.panel-body {
+    border: 3px solid #f2a83c;
+    background-color: rgba(97, 74, 45, 0.269);
+}
+
+.dismiss-btn {
+    color: #f2a83c;
+    border: 1px solid #f2a83c;
+    border-radius: 25px;
+    background-color: rgba(255, 0, 0, 0);
+}
+.seedHead {
+    font-size: 120%;
+    color: green
+}
+.head-seed, .head-soil {
+    color: white;
+}
+
+

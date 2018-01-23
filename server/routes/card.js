@@ -7,8 +7,8 @@ const router = express.Router();
 router.get("/", card.findAll);
 router.get("/:id", card.findByCardId);
 router.get("/:userID/:iteration/:since", card.findCardsForUser);
-router.get("/:userID", card.findByUser);
-router.post("/:id", card.create);
+router.get("/user/:userID", card.findAllForUser);
+router.post("/user/:userID", card.create);
 router.put("/:id", card.update);
 router.delete("/:id", card.remove);
 

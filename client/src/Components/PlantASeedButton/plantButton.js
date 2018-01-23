@@ -15,13 +15,17 @@ class PlantButton extends React.Component {
         this.handleHide = this.handleHide.bind(this);
 
         this.state = { 
-            show: false,
+            show: true,
             seed: '',
             soil: ''
         };
     }
 
     handleHide() {
+        this.setState({ show: true });
+
+    }
+    closeModal = () => {
         this.setState({ show: false });
     }
 
@@ -39,7 +43,8 @@ class PlantButton extends React.Component {
           alert("Enter the seed please!");
         }
         alert(`Your seed and soil ${this.state.seed} ${this.state.soil}`);
-        axios.post("api/card/1",{
+        const userID = 1;
+        axios.post(`/api/cards/user/${userID}`, {
             seed: this.state.seed,
             soil: this.state.soil
         }).then((response, error) => 
@@ -51,17 +56,18 @@ class PlantButton extends React.Component {
     
         return (
             <div className="modal-container" style={{ height: 100 }}>
-                <Button
+                {/* <Button
                     bsStyle="warning"
                     bsSize="large"
+                    className="hide"
                     onClick={() => this.setState({ show: true })}
                 >
                     PLANT A SEED!
-                </Button>
+                </Button> */}
 
                 <Modal
                     show={this.state.show}
-                    onHide={this.handleHide}
+                    onHide={this.closeModal}
                     container={this}
                     aria-labelledby="contained-modal-title"
                 >

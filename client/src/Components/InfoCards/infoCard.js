@@ -8,45 +8,79 @@ import FormGroup from 'react-bootstrap/lib/FormGroup';
 import Form from 'react-bootstrap/lib/Form';
 import { Col } from 'react-bootstrap';
 import { ControlLabel } from 'react-bootstrap';
-import Flower from './images/flower.png'
+import Flower from './images/flowerbloom@3x.png'
+import { Panel } from 'react-bootstrap';
 
 
-const infoCard = (
-	<Form horizontal>
-	<Col md={8} sm={12}>
-		<FormGroup controlId="formHorizontalEmail">
-			<Col componentClass={ControlLabel} sm={4}>
-				Your Soil is : 
-			</Col>
-			<Col sm={8}>
-				<h4 id="remind"><i>That guy that i met on the plane today.</i></h4>
-			</Col>
-		</FormGroup>
-		
-		<FormGroup controlId="formHorizontalEmail">			
-		<Col componentClass={ControlLabel} sm={4}>
-				Your Seed : 
-			</Col>
-			<Col sm={8}>
-				<h4 id="remind"><i>Danny.</i></h4>
-			</Col>
-		</FormGroup>
-		
-		</Col>
-		<Col md={4} sm={12}>
-		<div className="plant-image">plant image here
-			{ Flower }
-			<img src="./images/flower.png"/>
-		</div>
-		
-		</Col>
 
-		<FormGroup>
-			<Col sm={12}>
-				
+const InfoCard = (props) => (
+	<div>
+		<Form horizontal className="white">
+			<Col md={2} sm={0}>
 			</Col>
-		</FormGroup>
-	</Form>
+			<Col md={8} sm={12}>
+				<Panel className="panel-body">
+					<Panel.Body>
+						<Form horizontal className="seedInfo">
+							<Col md={8} sm={12} className="">
+								<FormGroup className="head-FormGroup">
+									<Col md={12}>
+									<Panel.Heading className="seedHead">
+										Remember This Seed?
+									</Panel.Heading>
+									</Col>
+								</FormGroup>
+								<FormGroup className="FormGroup">
+									<Col md={3}>
+									<h3 id="head-seed">Your Seed</h3>
+								</Col>
+									<Col md={9}>
+									<h3 id="remind-seed"><i>Teddy Ruxpin</i></h3>
+								</Col>
+								</FormGroup>
+								<FormGroup className="FormGroup">
+									<Col md={3}>
+									<h3 id="head-soil">Your Soil</h3>
+								</Col>
+									<Col md={9}>
+									<h3 id="remind-soil"><i>That teddy bear from the commercial.</i></h3>
+								</Col>
+								</FormGroup>
+							</Col>
+							<Col md={4} sm={12} className="some-image">
+								<FormGroup>
+								<Col md={12}>
+									<div>
+										<img src={Flower} width={100} height={100} alt="flower" />
+									</div>
+								</Col>
+								</FormGroup>
+								<FormGroup>
+								<Col md={12}>
+									<div>
+										<Button className="dismiss-btn">Dismiss</Button>
+									</div>
+								</Col>
+								</FormGroup>
+							</Col>
+							..........			
+				{/* <h4 id="remind-soil"><i>{props.soil}</i></h4>
+			
+			<img src={Flower} width={100} height={100} alt="flower"
+				onClick={props.clicked}/> */}
+............
+						</Form>
+					</Panel.Body>
+				</Panel>
+			</Col>
+			<Col md={2} sm={0}>
+			</Col>
+		</Form>
+	</div>
+
+
+
+
 );
 
-export default (infoCard);
+export default InfoCard;

@@ -1,4 +1,6 @@
 import React from "react";
+import { Redirect } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import './userLogon.scss';
 import Modal from 'react-bootstrap/lib/Modal'
 import ButtonToolbar from 'react-bootstrap/lib/ButtonToolbar';
@@ -8,11 +10,11 @@ import FormGroup from 'react-bootstrap/lib/FormGroup';
 import Form from 'react-bootstrap/lib/Form';
 import PlantASeedButton from '../PlantASeedButton'
 import axios from "axios";
+import Home from '../../Views/Home';
 
 
 
 const userLogon = (
-
     <form>
         <FormGroup bsSize="large">
             <FormControl className="userName" name="userName" type="text" placeholder="User Name" />
@@ -30,92 +32,97 @@ const userLogon = (
 );
 
 class UserLogon extends React.Component {
-    constructor(...args) {
-        console.log("inside constructor");
-        super(...args);
 
-        this.handleHide = this.handleHide.bind(this);
-
-        this.state = { 
-            show: false,
-            username: '',
-            userpass: '' };
+    state = {
+        redirectToReferrer: false,
+        redirectTo: '/',
+        respectOriginalReferrer: true,
+        username: '',
+        userpass: '' 
+    };
         
-    }
-
-    handleHide() {
-        this.setState({ show: false });
+    handleHide = (redirectTo, respectOriginalReferrer) => {
+        this.setState({
+            redirectToReferrer: true,
+            redirectTo,
+            respectOriginalReferrer,
+        })
     }
 
     handleInputChange = event => {    
         this.setState({
             [event.target.name]: event.target.value
         })
-        
-    };
+    }
 
     handleFormSubmit = event => {
         // Preventing the default behavior of the form submit (which is to refresh the page)
         // event.preventDefault();
-        if (!this.state.username) {
-          alert("Enter your username please!");
-        }
-        alert(`Your username and password ${this.state.username} ${this.state.userpass}`);
-        axios.post("https://localhost:3001/",{
+        // if (!this.state.username) {
+        //   alert("Enter your username please!");
+        // }
+        // alert(`Your username and password ${this.state.username} ${this.state.userpass}`);
+        axios.post("/api/users/", {
             username: this.state.username,
             userpass: this.state.userpass
-        }).then((response, error) => 
-        console.log(response, error)
-        )
-    };
+        }).then((response) => {
+            console.log(response);
+        }).catch((error) => {
+            console.log(error);            
+        }).then(() => {
+            this.props.login();
+            this.handleHide('/new', true);
+            this.context.subscribeForNotifications(1);
+            this.context.updateCards(1);
+        });
+    }
 
     render() {
-    
-        return (
+        const { from } = (this.state.respectOriginalReferrer &&
+                          this.props.location.state ||
+                          {from: this.state.redirectTo});
+        return this.state.redirectToReferrer ? (
+            <Redirect to={from}/>
+        ) : (
+            <div>
+                <Home/>
             <div className="modal-container" style={{ height: 100 }}>
-                <Button
-                    className="get-started"
-                    bsStyle="warning"
-                    bsSize="large"
-                    onClick={() => this.setState({ show: true })}
-                >
-                    Let's Get Started!
-                </Button>
-
                 <Modal
-                    show={this.state.show}
-                    onHide={this.handleHide}
+                    show={true}
+                    onHide={() => this.handleHide('/', false)}
                     container={this}
                     aria-labelledby="contained-modal-title"
                 >
                     <Modal.Header closeButton>
                         <Modal.Title id="contained-modal-title">
-                            <h1>Are you ready to start planting!</h1>
+                            Are you ready to start planting!
                         </Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-                        <h3>Simply create an account by entering a user name and password. That's it!
+                        <h3 id="userModBody">Simply create an account by entering your email and password. That's it!
                             ...or Sign in using your existing account info.
                             Have fun!</h3>
                         {userLogon}
                     </Modal.Body>
                     <Modal.Footer >
-                        {/* <Button class="plant-btn" onClick={this.handleHide}>Start Planting!</Button> */}
-                        
-                        <Button 
-                        className="signin-btn" 
-                        bsStyle="warning"
-                        bsSize="large"
-                        onClick={this.handleFormSubmit }>Let's GO!</Button>
-                        {/* onClick={this.handleHide }>Let's GO!</Button> */}
-                        
+
+                        <Button
+                            bsStyle="warning"
+                            bsSize="large"
+                            onClick={this.handleFormSubmit}
+                        >Let's GO!</Button>
+
                     </Modal.Footer>
-                    <PlantASeedButton />
                 </Modal>
+            </div>
             </div>
         );
     }
 }
 
+UserLogon.contextTypes = {
+    subscribeForNotifications: PropTypes.func,
+    updateCards: PropTypes.func,
+};
 
 export default UserLogon;

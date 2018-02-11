@@ -21,7 +21,7 @@ The Ultimate Memory Learning Tool - now you can commit anything from short term 
 
 * clone the PlantTheSeed repository:
 ```
-git clone https://github.com/EkaterinaShainiak/PlantTheSeed.git
+git clone https://github.com/TeamPlantTheSeed/memoryApp.git
 ```
 
 * Install yarn https://yarnpkg.com/en/docs/install or npm https://www.npmjs.com/get-npm?utm_source=house&utm_medium=homepage&utm_campaign=free%20orgs&utm_term=Install%20npm

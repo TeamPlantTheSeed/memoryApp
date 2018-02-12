@@ -1,7 +1,7 @@
 # 
 # Plant The Seed 
 
-The Ultimate Memory Learning Tool - now you can commit anything from short term to long term memory with the scientifically proven methods of repetition and retention. The App will allow you to create flash cards and send you notifications in a very  specific amount of time to make it as a game giving you feeling that you are growing up a flower from a seed to a blossom.
+The Ultimate Memory Learning Tool - now you can commit anything from short term to long term memory with the scientifically proven methods of repetition and retention. The App will allow you to create flash cards and send you notifications in very specific intervals, making it a game by giving you the feeling that you are growing a flower from a seed to a blossom.
 
 #### *Check it out on Heroku* :  https://planttheseed.herokuapp.com/
 
@@ -11,7 +11,7 @@ The Ultimate Memory Learning Tool - now you can commit anything from short term 
 * JavaScript
 * Node.js
 * Express
-* Seguelize
+* Sequelize
 * Bootstrap
 
 
@@ -47,14 +47,14 @@ DB_DIALECT=mysql
 
 
 
-The first you will see is a welcome page inviting you to LogIn and explaining mail purpose of the App:
+The first screen you will see is a welcome page inviting you to log in and explaining the main purpose of the App:
 
 ![HomePage](/client/public/images/homepage1.png)
 
 ![HomePage](/client/public/images/homepage2.png)
 
 
-Once you Loged In you can create a new Card:
+Once you are logged in you can create a new card:
 
 
 ![Create a Card](./client/public/images/createNewCard.png)
@@ -64,7 +64,7 @@ Once you Loged In you can create a new Card:
 
 
 
-Once Card has been created the scheduler starts working: it will send you PopUp Notifications in a specific amount of time even if you switched the tab. First two times notifications will show you both: the question (the Soil) and the answer (the Seed). For the third time the notification will ask for an action (you have to type the right answer):
+Once a card has been created the scheduler starts working: it will send you PopUp Notifications in a specific amount of time, even if you leave the browser tab. The first two notifications will show you both the question (the Soil) and the answer (the Seed). The third notification will ask for an action (you have to type the right answer):
 
 
 ![popUps](/client/public/images/popUps.png)
@@ -75,7 +75,7 @@ Once Card has been created the scheduler starts working: it will send you PopUp 
 
 
 
-In tab "YOUR SEEDS" you can see all Card that needs actions (you can type answer or dismiss). By the picture of plant on right side of the Card you may see your progress:
+In the "YOUR SEEDS" tab, you can see all cards that need actions (you can type the answer or dismiss the card). Your progress is shown next to the picture of the plant on the right side of the card: 
 
 
 ![yourSeeds](/client/public/images/yourSeeds.png)
@@ -85,7 +85,7 @@ In tab "YOUR SEEDS" you can see all Card that needs actions (you can type answer
 
 
 
-In tab "REMINDERS" shown all Cards that have been shsheduled for Notifications in future (timer shows how much time left untill the next notification):
+In the "REMINDERS" tab, you can see all cards that are scheduled for future notifications. (The timer shows how much time is left until the next notification):
 
 
 ![reminders](/client/public/images/reminders.png)
@@ -95,6 +95,6 @@ In tab "REMINDERS" shown all Cards that have been shsheduled for Notifications i
 
 
 
-In tab "ARHIVE" you can see all Cards that has been answered correctly and don't scheduled for notifications anymore. Delete them if ou sure that you got it:
+In the "ARCHIVE" tab, you can see all cards that have been answered correctly and are not scheduled for notifications. You may delete a card if you are sure that you have committed it to long term memory:
 
 ![arhive](/client/public/images/Arhive.png)
